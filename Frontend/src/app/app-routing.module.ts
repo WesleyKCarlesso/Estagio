@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.compoment';
 import { LoginComponent } from './login/login.component';
+import { CalendarComponent } from './calendar/calendar.component';
 import { Interceptor } from './app.interceptor.module';
 
 const routes: Routes = [];
@@ -17,7 +18,8 @@ const routes: Routes = [];
     AppComponent,
     HomeComponent,
     NavMenuComponent,
-    LoginComponent
+    LoginComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +29,7 @@ const routes: Routes = [];
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'calendar', component: CalendarComponent },
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: '**', redirectTo: '/home', pathMatch: 'full' }
     ]),
