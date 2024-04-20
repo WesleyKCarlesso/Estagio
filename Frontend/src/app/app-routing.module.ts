@@ -25,8 +25,10 @@ const routes: Routes = [];
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'login', component: LoginComponent, pathMatch: 'full' }
+      { path: 'home', component: HomeComponent },
+      { path: 'login', component: LoginComponent },
+      { path: '', redirectTo: '/home', pathMatch: 'full' },
+      { path: '**', redirectTo: '/home', pathMatch: 'full' }
     ]),
     Interceptor
   ],
