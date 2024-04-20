@@ -8,16 +8,16 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.compoment';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { Interceptor } from './app.interceptor.module';
-
-const routes: Routes = [];
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavMenuComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +27,7 @@ const routes: Routes = [];
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: '**', redirectTo: '/home', pathMatch: 'full' }
     ]),
