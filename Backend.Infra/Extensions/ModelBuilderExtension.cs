@@ -9,7 +9,7 @@ namespace Backend.Data.Extensions
         {
             modelBuilder.Entity<User>()
                 .HasData(
-                    new User { Id = Guid.NewGuid(), Name = "User Default", Email = "email@backend.com" }
+                    new User { Id = Guid.NewGuid(), Name = "User Default", Email = "email@backend.com", IsDeleted = false }
                 );
 
             return modelBuilder;

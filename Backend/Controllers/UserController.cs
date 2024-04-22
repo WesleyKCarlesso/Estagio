@@ -17,9 +17,9 @@ namespace Backend.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            userService.Test();
+            var users = userService.Get();
 
-            return Ok("Ok");
+            return Ok(users);
         }
     }
 }
