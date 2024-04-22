@@ -28,5 +28,19 @@ namespace Backend.Controllers
         {
             userService.Create(userViewModel);
         }
+
+        [HttpGet("GetById/{id}")]
+        public IActionResult GetById(string id)
+        {
+            var user = userService.GetById(id);
+
+            return Ok(user);
+        }
+
+        [HttpPost("Update")]
+        public void Update(UserViewModel userViewModel)
+        {
+            userService.Update(userViewModel);
+        }
     }
 }

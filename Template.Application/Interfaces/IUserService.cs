@@ -10,7 +10,8 @@ namespace Backend.Application.Interfaces
     public interface IUserService
     {
         List<UserViewModel> GetAll();
-
         void Create(UserViewModel userViewModel);
+        UserViewModel GetById(string id);
+        void Update(UserViewModel userViewModel);
     }
 }
