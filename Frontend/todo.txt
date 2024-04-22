@@ -1,2 +1,3 @@
 modificar navbar tbm
 quando esta logado, o login redireciona para config de user
+mudar para lista de servicos, etc, ao invez de texto para duracoes
