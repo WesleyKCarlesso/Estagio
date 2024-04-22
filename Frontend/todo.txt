@@ -1,0 +1,2 @@
+modificar navbar tbm
+quando esta logado, o login redireciona para config de user
