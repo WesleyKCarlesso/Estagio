@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Backend.Domain.Interfaces
 {
-    public interface IUserRepository// : IRepository<User>
+    public interface IUserRepository : IRepository<User>
     {
         IEnumerable<User> GetAll();
     }

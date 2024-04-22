@@ -18,13 +18,26 @@ namespace Backend.Application.Services
             this.userRepository = userRepository;
         }
 
-        public List<UserViewModel> Get()
+        public List<UserViewModel> GetAll()
         {
             IEnumerable<User> users = userRepository.GetAll();
 
             List<UserViewModel> usersViewModel = users.Select(x => new UserViewModel() { Id = x.Id, Name = x.Name, Email = x.Email }).ToList();
 
             return usersViewModel;
+        }
+
+        public void Create(UserViewModel userViewModel)
+        {
+            User user = new User
+            {
+                Id = userViewModel.Id,
+                Name = userViewModel.Name,
+                Email = userViewModel.Email,
+                IsDeleted = false
+            };
+
+            userRepository.Create(user);
         }
     }
 }

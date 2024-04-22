@@ -1,4 +1,5 @@
 ﻿using Backend.Application.Interfaces;
+using Backend.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
@@ -14,12 +15,18 @@ namespace Backend.Controllers
             this.userService = userService;
         }
 
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("GetAll")]
+        public IActionResult GetAll()
         {
-            var users = userService.Get();
+            var users = userService.GetAll();
 
             return Ok(users);
+        }
+
+        [HttpPost("Create")]
+        public void Create(UserViewModel userViewModel)
+        {
+            userService.Create(userViewModel);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Backend.Domain.Entities;
+using Backend.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Data.Extensions

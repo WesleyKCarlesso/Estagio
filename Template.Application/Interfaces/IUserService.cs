@@ -9,6 +9,8 @@ namespace Backend.Application.Interfaces
 {
     public interface IUserService
     {
-        List<UserViewModel> Get();
+        List<UserViewModel> GetAll();
+
+        void Create(UserViewModel userViewModel);
     }
 }
