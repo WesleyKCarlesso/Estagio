@@ -1,4 +1,5 @@
 using Backend.Data.Context;
+using Backend.IoC;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<BackendContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("BackendDB")).EnableSensitiveDataLogging());
+
+NativeInjector.RegisterServices(builder.Services);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
