@@ -35,16 +35,12 @@ namespace Backend.Application.Services
         public UserViewModel GetById(string id)
         {
             if (!Guid.TryParse(id, out Guid userId))
-            {
                 throw new Exception("UserId is not valid!");
-            }
 
             User user = userRepository.Find(x => x.Id == userId && !x.IsDeleted);
 
             if (user == null)
-            {
                 throw new Exception("User not found!");
-            }
 
             return mapper.Map<UserViewModel>(user);
         }
@@ -54,13 +50,23 @@ namespace Backend.Application.Services
             User user = userRepository.Find(x => x.Id == userViewModel.Id && !x.IsDeleted);
 
             if (user == null)
-            {
                 throw new Exception("User not found!");
-            }
 
             user = mapper.Map<User>(userViewModel);
 
             userRepository.Update(user);
+        }
+
+        public void Delete(string id) {
+            if (!Guid.TryParse(id, out Guid userId))
+                throw new Exception("UserId is not valid!");
+
+            User user = userRepository.Find(x => x.Id == userId && !x.IsDeleted);
+
+            if (user == null)
+                throw new Exception("User not found!");
+
+            userRepository.Delete(user);
         }
     }
 }

@@ -13,5 +13,6 @@ namespace Backend.Application.Interfaces
         void Create(UserViewModel userViewModel);
         UserViewModel GetById(string id);
         void Update(UserViewModel userViewModel);
+        void Delete(string id);
     }
 }

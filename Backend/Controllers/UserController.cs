@@ -42,5 +42,11 @@ namespace Backend.Controllers
         {
             userService.Update(userViewModel);
         }
+
+        [HttpDelete("Delete/{id}")]
+        public void Delete(string id)
+        {
+            userService.Delete(id);
+        }
     }
 }
