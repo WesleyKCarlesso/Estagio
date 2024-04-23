@@ -1,11 +1,14 @@
 ﻿using Backend.Application.Interfaces;
 using Backend.Application.ViewModels;
+using Estagio.Auth.Packages;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Backend.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController, Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserService userService;
@@ -23,7 +26,7 @@ namespace Backend.Controllers
             return Ok(users);
         }
 
-        [HttpPost("Create")]
+        [HttpPost("Create"), AllowAnonymous]
         public void Create(UserViewModel userViewModel)
         {
             userService.Create(userViewModel);
@@ -43,10 +46,20 @@ namespace Backend.Controllers
             userService.Update(userViewModel);
         }
 
-        [HttpDelete("Delete/{id}")]
-        public void Delete(string id)
+        [HttpDelete("Delete")]
+        public void Delete()
         {
+            //pega o id do usuario logado
+            string id = TokenService.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier);
             userService.Delete(id);
+        }
+
+        [HttpPost("Authenticate"), AllowAnonymous]
+        public IActionResult Authenticate(UserAuthenticateRequestViewModel userViewModel)
+        {
+            var response = userService.Authenticate(userViewModel);
+
+            return Ok(response);
         }
     }
 }

@@ -14,5 +14,6 @@ namespace Backend.Application.Interfaces
         UserViewModel GetById(string id);
         void Update(UserViewModel userViewModel);
         void Delete(string id);
+        UserAuthenticateResponseViewModel Authenticate(UserAuthenticateRequestViewModel user);
     }
 }
