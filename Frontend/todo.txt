@@ -1,3 +1,5 @@
 modificar navbar tbm
 quando esta logado, o login redireciona para config de user
 mudar para lista de servicos, etc, ao invez de texto para duracoes
+
+cria tres dropdowns, um com o serviço, outro com o dia e outro com os horarios disponiveis, baseado no dia e no serviço

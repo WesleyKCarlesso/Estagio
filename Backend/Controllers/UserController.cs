@@ -18,18 +18,25 @@ namespace Backend.Controllers
             this.userService = userService;
         }
 
-        [HttpGet("GetAll")]
-        public IActionResult GetAll()
+        [HttpGet("GetAll"), AllowAnonymous]
+        public List<UserViewModel> GetAll()
         {
             var users = userService.GetAll();
 
-            return Ok(users);
+            return users;
         }
 
         [HttpPost("Create"), AllowAnonymous]
-        public void Create(UserViewModel userViewModel)
+        public IActionResult Create(UserViewModel userViewModel)
         {
+            var users = GetAll();
+
+            if (users != null && users.Any(x => x.Email.ToLower() == userViewModel.Email.ToLower())) {
+                return BadRequest("Este email já está cadastrado no sistema.");
+            }
+
             userService.Create(userViewModel);
+            return Ok();
         }
 
         [HttpGet("GetById/{id}")]

@@ -13,6 +13,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { DemoComponent } from './calendar/calendar.component';
 import { Interceptor } from './app.interceptor.module';
+import { UserDataService } from './data-services/user.data-service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { Interceptor } from './app.interceptor.module';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
       { path: 'login', component: LoginComponent },
@@ -44,7 +47,7 @@ import { Interceptor } from './app.interceptor.module';
     Interceptor
   ],
   providers: [
-    
+    UserDataService
   ],
   exports: [RouterModule],
   bootstrap: [AppComponent]

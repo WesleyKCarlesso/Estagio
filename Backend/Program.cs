@@ -1,4 +1,3 @@
-
 using Backend.Application.AutoMapper;
 using Backend.Data.Context;
 using Backend.IoC;
@@ -19,13 +18,13 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
+        var allowAngularApp = "AllowAngularApp";
 
         builder.Services.AddControllers();
 
         builder.Services.AddDbContext<BackendContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("BackendDB")).EnableSensitiveDataLogging());
         NativeInjector.RegisterServices(builder.Services);
-        
+
         builder.Services.AddAutoMapper(typeof(AutoMapperSetup));
 
         IdentityModelEventSource.ShowPII = true;
@@ -48,7 +47,14 @@ internal class Program
             };
         });
 
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy(allowAngularApp,
+                builder => builder.WithOrigins("http://localhost:4200") // Substitua pelo domínio do seu aplicativo Angular
+                                 .AllowAnyMethod()
+                                 .AllowAnyHeader());
+        });
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(c =>
         {
@@ -70,8 +76,8 @@ internal class Program
                           {
                               Reference = new OpenApiReference
                               {
-                                  Type = ReferenceType.SecurityScheme,
-                                  Id = "Bearer"
+                                 Type = ReferenceType.SecurityScheme,
+                                 Id = "Bearer"
                               }
                           },
                          new string[] {}
@@ -81,7 +87,8 @@ internal class Program
 
         var app = builder.Build();
 
-        // Configure the HTTP request pipeline.
+        app.UseCors(allowAngularApp);
+
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
