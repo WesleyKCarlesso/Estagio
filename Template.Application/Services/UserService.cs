@@ -72,9 +72,15 @@ namespace Backend.Application.Services
 
         public UserAuthenticateResponseViewModel Authenticate(UserAuthenticateRequestViewModel user)
         {
-            User _user = userRepository.Find(x => !x.IsDeleted && x.Email.ToLower() == user.Email.ToLower());
+            var users = userRepository.GetAll().Where(x => x.Email.ToLower() == user.Email.ToLower());
+
+            if (!users.Any())
+                throw new Exception("O endereço de e-mail informado não existe no sistema.");
+
+            User? _user = users.FirstOrDefault(x => x.Password.ToLower() == user.Password.ToLower());
+
             if (_user == null)
-                throw new Exception("User not found");
+                throw new Exception("Senha incorreta.");
 
             string token = TokenService.GenerateToken(_user);
 

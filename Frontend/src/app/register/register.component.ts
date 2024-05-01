@@ -13,7 +13,7 @@ export class RegisterComponent {
   user: any = {};
   registerForm!: FormGroup;
 
-  constructor(private userDataService: UserDataService, private snackBarService: SnackBarService, private zone: NgZone) { }
+  constructor(private userDataService: UserDataService, private snackBarService: SnackBarService) { }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -51,10 +51,9 @@ export class RegisterComponent {
       return;
     }
 
-    this.userDataService.post(this.user).subscribe({
+    this.userDataService.create(this.user).subscribe({
       next: () => {
-        console.log('Usuário cadastrado com sucesso!');
-        alert('Usuário cadastrado com sucesso!');
+        this.snackBarService.openSnackBar('Usuário cadastrado com sucesso!', "Entendido");
       },
       error: (error) => {
         console.error('Erro ao cadastrar usuário:', error);

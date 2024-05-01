@@ -3,21 +3,24 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class UserDataService {
-    getAllUrl: string = 'https://localhost:7018/api/User/GetAll';
-    createUrl: string = 'https://localhost:7018/api/User/Create';
+    module: string = 'https://localhost:7018/api/User/';
 
     constructor(private http: HttpClient) { }
 
-    get() {
-        return this.http.get(this.getAllUrl);
+    getAll() {
+        return this.http.get(this.module + 'GetAll');
     }
 
-    post(data: any) {
+    create(data: any) {
         const httpOptions = {
           headers: new HttpHeaders({
             'Content-Type': 'application/json'
           })
         };
-        return this.http.post(this.createUrl, data, httpOptions);
+        return this.http.post(this.module + 'Create', data, httpOptions);
+    }
+
+    authenticate(data: any) {
+      return this.http.post(this.module + 'Authenticate', data);
     }
 }

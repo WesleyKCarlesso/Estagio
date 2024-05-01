@@ -64,9 +64,16 @@ namespace Backend.Controllers
         [HttpPost("Authenticate"), AllowAnonymous]
         public IActionResult Authenticate(UserAuthenticateRequestViewModel userViewModel)
         {
-            var response = userService.Authenticate(userViewModel);
+            try
+            {
+                var response = userService.Authenticate(userViewModel);
 
-            return Ok(response);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

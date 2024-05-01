@@ -16,8 +16,9 @@ namespace Backend.Data.Mappings
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id).IsRequired();
-
-            builder.Property(x => x.Name).HasMaxLength(100).IsRequired();
+            builder.Property(x => x.Name).IsRequired();
+            builder.Property(x => x.Password).IsRequired();
+            builder.Property(x => x.IsAdmin).HasDefaultValue(false).IsRequired();
         }
     }
 }
