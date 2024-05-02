@@ -2,6 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { UserDataService } from '../data-services/user.data-service';
 import { SnackBarService } from '../data-services/snack-bar.service';
 import { FormGroup, FormControl, Validators, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ export class RegisterComponent {
   user: any = {};
   registerForm!: FormGroup;
 
-  constructor(private userDataService: UserDataService, private snackBarService: SnackBarService) { }
+  constructor(private userDataService: UserDataService, private snackBarService: SnackBarService, private router: Router) { }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -54,6 +55,22 @@ export class RegisterComponent {
     this.userDataService.create(this.user).subscribe({
       next: () => {
         this.snackBarService.openSnackBar('Usuário cadastrado com sucesso!', "Entendido");
+
+        this.userDataService.authenticate(this.user).subscribe({
+          next: (data: any) => {
+            this.snackBarService.openSnackBar('Login realizado com sucesso.', "Entendido");
+    
+            this.router.navigate(['/home']);
+
+            if (data.user) {
+              localStorage.setItem('user_logged', JSON.stringify(data));
+            }
+          },
+          error: (error) => {
+            console.error('Erro ao realizar login:', error);
+            let errorMessage = 'Erro ao realizar login. Por favor, tente novamente mais tarde.';
+          }
+        });
       },
       error: (error) => {
         console.error('Erro ao cadastrar usuário:', error);

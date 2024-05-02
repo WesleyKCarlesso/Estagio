@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '../data-services/user.data-service';
 import { SnackBarService } from '../data-services/snack-bar.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   user: any = {};
   loginForm!: FormGroup;
   
-  constructor(private userDataService: UserDataService, private snackBarService: SnackBarService) {}
+  constructor(private userDataService: UserDataService, private snackBarService: SnackBarService, private router: Router) {}
 
   ngOnInit() {
     this.getTest();
@@ -47,6 +48,8 @@ export class LoginComponent implements OnInit {
     this.userDataService.authenticate(this.user).subscribe({
       next: (data: any) => {
         this.snackBarService.openSnackBar('Login realizado com sucesso.', "Entendido");
+
+        this.router.navigate(['/home']);
 
         if (data.user) {
           localStorage.setItem('user_logged', JSON.stringify(data));

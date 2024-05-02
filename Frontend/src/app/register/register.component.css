@@ -23,14 +23,14 @@
 }
 
 .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #28a745;
+    border-color: #28a745;
     margin-top: 20px;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    background-color: #218838;
+    border-color: #218838;
 }
 
 .btn-block {
