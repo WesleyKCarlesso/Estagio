@@ -7,11 +7,9 @@ import { CommonModule } from '@angular/common';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.compoment';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { DemoComponent } from './calendar/calendar.component';
 import { Interceptor } from './app.interceptor.module';
 import { UserDataService } from './data-services/user.data-service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -20,10 +18,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   declarations: [
     AppComponent,
     HomeComponent,
-    NavMenuComponent,
     LoginComponent,
-    RegisterComponent,
-    DemoComponent
+    RegisterComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +36,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
       { path: 'home', component: HomeComponent },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
-      { path: 'calendar', component: DemoComponent },
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: '**', redirectTo: '/home', pathMatch: 'full' }
     ]),

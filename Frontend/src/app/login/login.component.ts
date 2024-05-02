@@ -14,12 +14,24 @@ export class LoginComponent implements OnInit {
   user: any = {};
   loginForm!: FormGroup;
   
-  constructor(private userDataService: UserDataService, private snackBarService: SnackBarService,) {}
+  constructor(private userDataService: UserDataService, private snackBarService: SnackBarService) {}
 
   ngOnInit() {
+    this.getTest();
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required])
+    });
+  }
+
+  getTest() {
+    this.userDataService.getAll().subscribe({
+      next: (data: any) => {
+        debugger;
+      },
+      error: (error) => {
+        debugger;
+      }
     });
   }
 
@@ -34,7 +46,6 @@ export class LoginComponent implements OnInit {
   authenticate() {
     this.userDataService.authenticate(this.user).subscribe({
       next: (data: any) => {
-        debugger;
         this.snackBarService.openSnackBar('Login realizado com sucesso.', "Entendido");
 
         if (data.user) {

@@ -18,7 +18,7 @@ namespace Backend.Controllers
             this.userService = userService;
         }
 
-        [HttpGet("GetAll"), AllowAnonymous]
+        [HttpGet("GetAll")]
         public List<UserViewModel> GetAll()
         {
             var users = userService.GetAll();
@@ -47,7 +47,7 @@ namespace Backend.Controllers
             return Ok(user);
         }
 
-        [HttpPost("Update")]
+        [HttpPut("Update")]
         public void Update(UserViewModel userViewModel)
         {
             userService.Update(userViewModel);
