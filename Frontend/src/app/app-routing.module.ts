@@ -13,13 +13,17 @@ import { RegisterComponent } from './register/register.component';
 import { Interceptor } from './app.interceptor.module';
 import { UserDataService } from './data-services/user.data-service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CalendarComponent } from './calendar/calendar.component';
+import { MyDataComponent } from './mydata/mydata.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CalendarComponent,
+    MyDataComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +40,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
       { path: 'home', component: HomeComponent },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
+      { path: 'calendar', component: CalendarComponent },
+      { path: 'mydata', component: MyDataComponent },
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: '**', redirectTo: '/home', pathMatch: 'full' }
     ]),

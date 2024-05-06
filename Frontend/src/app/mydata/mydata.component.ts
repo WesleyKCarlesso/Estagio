@@ -5,21 +5,23 @@ import { FormGroup, FormControl, Validators, ValidatorFn, ValidationErrors, Abst
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-mydata',
+  templateUrl: './mydata.component.html',
+  styleUrls: ['./mydata.component.css']
 })
-export class RegisterComponent {
+export class MyDataComponent {
 
   user: any = {};
-  registerForm!: FormGroup;
+  myDataForm!: FormGroup;
 
   constructor(private userDataService: UserDataService, private snackBarService: SnackBarService, private router: Router) { }
 
   ngOnInit() {
-    this.registerForm = new FormGroup({
+    this.myDataForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
+      gender: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required, Validators.pattern(/^\+?[0-9]{2}\s?[0-9]{8,9}$/)]),
       password: new FormControl('', [Validators.required]),
       confirmPassword: new FormControl('', [Validators.required]),
     }, { validators: this.checkPasswords })
@@ -28,53 +30,48 @@ export class RegisterComponent {
   checkPasswords: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => { 
     let pass = group.get('password')?.value;
     let confirmPass = group.get('confirmPassword')?.value
-    return pass === confirmPass ? null : { notSame: true }
+    return pass === confirmPass? null : { notSame: true }
   }
 
   get name() {
-    return this.registerForm.get('name')!;
+    return this.myDataForm.get('name')!;
   }
 
   get email() {
-    return this.registerForm.get('email')!;
+    return this.myDataForm.get('email')!;
+  }
+
+  get gender() {
+    return this.myDataForm.get('gender')!;
+  }
+
+  get phone() {
+    return this.myDataForm.get('phone')!;
   }
 
   get password() {
-    return this.registerForm.get('password')!;
+    return this.myDataForm.get('password')!;
   }
 
   get confirmPassword() {
-    return this.registerForm.get('confirmPassword')!;
+    return this.myDataForm.get('confirmPassword')!;
   }
 
-  registrar() {
-    if (this.registerForm.invalid) {
+  update() {
+    debugger;
+    if (this.myDataForm.invalid) {
       return;
     }
 
-    this.userDataService.create(this.user).subscribe({
+    this.user.Sex = parseInt(this.user.Sex, 10);
+
+    this.userDataService.update(this.user).subscribe({
       next: () => {
-        this.snackBarService.openSnackBar('Usuário cadastrado com sucesso!', "Entendido");
-
-        this.userDataService.authenticate(this.user).subscribe({
-          next: (data: any) => {
-            this.snackBarService.openSnackBar('Login realizado com sucesso.', "Entendido");
-    
-            this.router.navigate(['/home']);
-
-            if (data.user) {
-              localStorage.setItem('user_logged', JSON.stringify(data));
-            }
-          },
-          error: (error) => {
-            console.error('Erro ao realizar login:', error);
-            let errorMessage = 'Erro ao realizar login. Por favor, tente novamente mais tarde.';
-          }
-        });
+        this.snackBarService.openSnackBar('Usuário atualizado com sucesso!', "Entendido");
       },
       error: (error) => {
-        console.error('Erro ao cadastrar usuário:', error);
-        let errorMessage = 'Erro ao cadastrar usuário. Por favor, tente novamente mais tarde.';
+        console.error('Erro ao atualizar usuário:', error);
+        let errorMessage = 'Erro ao atualizar usuário. Por favor, tente novamente mais tarde.';
         if (error.status == 400) {
           this.snackBarService.openSnackBar(error.error, "Entendido");
         }

@@ -1,0 +1,63 @@
+/* Estilos existentes */
+.container.mydata {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.mydata-container {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 75vh;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.mydata-container h2 {
+    color: #343a40;
+}
+
+.form-group label {
+    color: #343a40;
+}
+
+.btn-primary {
+    background-color: #28a745;
+    border-color: #28a745;
+    margin-top: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #218838;
+    border-color: #218838;
+}
+
+.btn-block {
+    display: inline;
+    margin-left: 30%;
+    width: 35%;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    flex: 1;
+    margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+   .form-group {
+        flex-basis: 100%;
+        margin-right: 0;
+    }
+}
+
+.form-control {
+    width: 30vh;
+}

@@ -1,4 +1,5 @@
-﻿using Backend.Domain.Models;
+﻿using Backend.Domain.Enums;
+using Backend.Domain.Models;
 
 namespace Backend.Domain.Entities
 {
@@ -8,5 +9,7 @@ namespace Backend.Domain.Entities
         public string Email { get; set; }
         public string Password { get; set; }
         public bool IsAdmin { get; set; }
+        public EnumSex Sex { get; set; }
+        public string Phone { get; set; }
     }
 }

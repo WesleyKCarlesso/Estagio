@@ -51,7 +51,7 @@ namespace Backend.Application.Services
             User user = userRepository.Find(x => x.Id == userViewModel.Id && !x.IsDeleted);
 
             if (user == null)
-                throw new Exception("User not found!");
+                throw new Exception("Usuário não encontrado.");
 
             user = mapper.Map<User>(userViewModel);
 

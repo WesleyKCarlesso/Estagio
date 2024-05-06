@@ -23,4 +23,8 @@ export class UserDataService {
     authenticate(data: any) {
       return this.http.post(this.module + 'Authenticate', data);
     }
+
+    update(data: any) {
+      return this.http.put(this.module + 'Update', data)
+    }
 }

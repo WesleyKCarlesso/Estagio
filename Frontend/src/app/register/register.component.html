@@ -18,7 +18,7 @@
 <div class="container fluid register">
   <div class="register-container p-5">
     <h2 class="text-center mb-4">Registrar</h2>
-    <form (ngSubmit)="post()" [formGroup]="registerForm" #formDir="ngForm">
+    <form (ngSubmit)="registrar()" [formGroup]="registerForm" #formDir="ngForm">
       <div class="form-group">
         <label for="name">Nome</label>
         <input type="text" class="form-control" id="name" placeholder="Insira seu nome" formControlName="name" [(ngModel)]="user.Name" name="name">

@@ -1,4 +1,5 @@
 ﻿using Backend.Domain.Entities;
+using Backend.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -19,6 +20,8 @@ namespace Backend.Data.Mappings
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.Password).IsRequired();
             builder.Property(x => x.IsAdmin).HasDefaultValue(false).IsRequired();
+            builder.Property(x => x.Password).IsRequired();
+            builder.Property(x => x.Sex).HasDefaultValue(EnumSex.Other).IsRequired();
         }
     }
 }

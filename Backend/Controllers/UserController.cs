@@ -48,9 +48,21 @@ namespace Backend.Controllers
         }
 
         [HttpPut("Update")]
-        public void Update(UserViewModel userViewModel)
+        public IActionResult Update(UserViewModel userViewModel)
         {
-            userService.Update(userViewModel);
+            try
+            {
+                string id = TokenService.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier);
+
+                userViewModel.Id = new Guid(id);
+
+                userService.Update(userViewModel);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("Delete")]

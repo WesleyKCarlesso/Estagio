@@ -1,4 +1,5 @@
 ﻿using Backend.Domain.Entities;
+using Backend.Domain.Enums;
 using Backend.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +11,7 @@ namespace Backend.Data.Extensions
         {
             modelBuilder.Entity<User>()
                 .HasData(
-                    new User { Id = Guid.NewGuid(), Name = "User Default", Email = "email@backend.com", IsDeleted = false, Password = "GenericPassword", IsAdmin = false }
+                    new User { Id = Guid.NewGuid(), Name = "User Default", Email = "email@backend.com", IsDeleted = false, Password = "GenericPassword", IsAdmin = false, Phone = "99 999999999", Sex = EnumSex.Other }
                 );
 
             return modelBuilder;

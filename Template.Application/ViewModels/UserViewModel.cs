@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Backend.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace Backend.Application.ViewModels
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
+        public EnumSex Sex { get; set; }
+        public string Phone { get; set; }
         public bool IsAdmin { get; set; }
     }
 }
