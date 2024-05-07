@@ -53,7 +53,7 @@ const colors: Record<string, EventColor> = {
       }
     `,
   ],
-  templateUrl: 'template.html',
+  templateUrl: 'calendar.component.html',
 })
 export class CalendarComponent {
   view: CalendarView = CalendarView.Month;
@@ -167,6 +167,23 @@ export class CalendarComponent {
         title: 'New event',
         start: startOfDay(new Date()),
         end: endOfDay(new Date()),
+        color: {primary: '#ff0000', secondary: '#ff0000'},
+        draggable: true,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true,
+        },
+      },
+    ];
+  }
+
+  addEventWithParams(data: any): void {
+    this.events = [
+      ...this.events,
+      {
+        title: data.name,
+        start: startOfDay(data.start),
+        end: endOfDay(data.end),
         color: {primary: '#ff0000', secondary: '#ff0000'},
         draggable: true,
         resizable: {
