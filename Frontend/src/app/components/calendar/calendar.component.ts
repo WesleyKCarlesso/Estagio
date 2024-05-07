@@ -3,7 +3,7 @@ import {
   ChangeDetectionStrategy,
   ViewChild,
   TemplateRef,
-} from '@angular/core';
+} from "@angular/core";
 import {
   startOfDay,
   endOfDay,
@@ -13,33 +13,33 @@ import {
   isSameDay,
   isSameMonth,
   addHours,
-} from 'date-fns';
-import { Subject } from 'rxjs';
+} from "date-fns";
+import { Subject } from "rxjs";
 import {
   CalendarEvent,
   CalendarEventAction,
   CalendarEventTimesChangedEvent,
   CalendarView,
-} from 'angular-calendar';
-import { EventColor } from 'calendar-utils';
+} from "angular-calendar";
+import { EventColor } from "calendar-utils";
 
 const colors: Record<string, EventColor> = {
   red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
+    primary: "#ad2121",
+    secondary: "#FAE3E3",
   },
   blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
+    primary: "#1e90ff",
+    secondary: "#D1E8FF",
   },
   yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
+    primary: "#e3bc08",
+    secondary: "#FDF1BA",
   },
 };
 
 @Component({
-  selector: 'app-calendar',
+  selector: "app-calendar",
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [
     `
@@ -53,7 +53,7 @@ const colors: Record<string, EventColor> = {
       }
     `,
   ],
-  templateUrl: 'calendar.component.html',
+  templateUrl: "calendar.component.html",
 })
 export class CalendarComponent {
   view: CalendarView = CalendarView.Month;
@@ -65,63 +65,24 @@ export class CalendarComponent {
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
+      a11yLabel: "Edit",
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
+        this.handleEvent("Edited", event);
       },
     },
     {
       label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
+      a11yLabel: "Delete",
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
+        this.handleEvent("Deleted", event);
       },
     },
   ];
 
   refresh = new Subject<void>();
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: { primary: '#ff00ff', secondary: '#00ffff' },
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: { primary: '#ff00ff', secondary: '#00ffff' },
-      actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      allDay: true,
-      color: { primary: '#ff00ff', secondary: '#00ffff' },
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: { primary: '#ff00ff', secondary: '#00ffff' },
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-  ];
+  events: CalendarEvent[] = [];
 
   activeDayIsOpen: boolean = true;
 
@@ -144,6 +105,7 @@ export class CalendarComponent {
     newStart,
     newEnd,
   }: CalendarEventTimesChangedEvent): void {
+    console.log(newEnd);
     this.events = this.events.map((iEvent) => {
       if (iEvent === event) {
         return {
@@ -154,20 +116,21 @@ export class CalendarComponent {
       }
       return iEvent;
     });
-    this.handleEvent('Dropped or resized', event);
+    this.handleEvent("Dropped or resized", event);
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
+    console.log(action, event);
   }
 
-  addEvent(): void {
+  addEvent(title: string, start: Date): void {
     this.events = [
       ...this.events,
       {
-        title: 'New event',
+        title: "New event",
         start: startOfDay(new Date()),
         end: endOfDay(new Date()),
-        color: {primary: '#ff0000', secondary: '#ff0000'},
+        color: { primary: "#ff0000", secondary: "#ff0000" },
         draggable: true,
         resizable: {
           beforeStart: true,
@@ -184,7 +147,7 @@ export class CalendarComponent {
         title: data.name,
         start: startOfDay(data.start),
         end: endOfDay(data.end),
-        color: {primary: '#ff0000', secondary: '#ff0000'},
+        color: { primary: "#ff0000", secondary: "#ff0000" },
         draggable: true,
         resizable: {
           beforeStart: true,
