@@ -22,14 +22,14 @@
         <div class="form-row">
             <div class="form-group">
                 <label for="name">Nome</label>
-                <input type="text" class="form-control" id="name" placeholder="Insira seu nome" formControlName="name" [(ngModel)]="user.Name" name="name">
+                <input type="text" class="form-control" id="name" placeholder="Insira seu nome" formControlName="name" [(ngModel)]="user.name" name="name">
                 <div *ngIf="name.invalid && formDir.submitted" class="validation-error">
                     <p *ngIf="name.errors?.['required']">O nome é obrigatório!</p>
                 </div>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Insira seu email" formControlName="email" [(ngModel)]="user.Email" name="email">
+                <input type="email" class="form-control" id="email" placeholder="Insira seu email" formControlName="email" [(ngModel)]="user.email" name="email">
                 <div *ngIf="email.invalid && formDir.submitted" class="validation-error">
                     <p *ngIf="email.errors?.['required']">O email é obrigatório!</p>
                     <p *ngIf="email.errors?.['email']">O email está inválido!</p>
@@ -39,7 +39,7 @@
         <div class="form-row">
             <div class="form-group">
                 <label for="gender">Sexo</label>
-                <select class="form-control" id="gender" formControlName="gender" [(ngModel)]="user.Sex" name="gender">
+                <select class="form-control" id="gender" formControlName="gender" [(ngModel)]="user.sex" name="gender">
                     <option value="">Selecione...</option>
                     <option value="0">Masculino</option>
                     <option value="1">Feminino</option>
@@ -48,7 +48,7 @@
             </div>            
             <div class="form-group">
                 <label for="password">Senha</label>
-                <input type="password" class="form-control" id="password" placeholder="Insira sua senha" formControlName="password" [(ngModel)]="user.Password" name="password">
+                <input type="password" class="form-control" id="password" placeholder="Insira sua senha" formControlName="password" [(ngModel)]="user.password" name="password">
                 <div *ngIf="password.invalid && formDir.submitted" class="validation-error">
                     <p *ngIf="password.errors?.['required']">A senha é obrigatória!</p>
                 </div>
@@ -57,7 +57,7 @@
         <div class="form-row">            
             <div class="form-group">
                 <label for="phone">Telefone para contato</label>
-                <input type="tel" class="form-control" id="phone" placeholder="Insira seu telefone" formControlName="phone" name="phone" [(ngModel)]="user.Phone" pattern="\+?[0-9]{2}\s?[0-9]{5,9}">
+                <input type="tel" class="form-control" id="phone" placeholder="Insira seu telefone" formControlName="phone" name="phone" [(ngModel)]="user.phone" pattern="\+?[0-9]{2}\s?[0-9]{5,9}">
                 <div *ngIf="phone.invalid && formDir.submitted" class="validation-error">
                     <p *ngIf="phone.errors?.['required']">O telefone é obrigatório!</p>
                     <p *ngIf="phone.errors?.['pattern']">O formato do telefone é inválido Deve seguir o formato DDD + 9 dígitos.</p>

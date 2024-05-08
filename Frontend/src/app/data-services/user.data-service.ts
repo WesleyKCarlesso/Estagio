@@ -3,28 +3,32 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class UserDataService {
-    module: string = 'https://localhost:7018/api/User/';
+  module: string = 'https://localhost:7018/api/User/';
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    getAll() {
-        return this.http.get(this.module + 'GetAll');
-    }
+  getAll() {
+    return this.http.get(this.module + 'GetAll');
+  }
 
-    create(data: any) {
-        const httpOptions = {
-          headers: new HttpHeaders({
-            'Content-Type': 'application/json'
-          })
-        };
-        return this.http.post(this.module + 'Create', data, httpOptions);
-    }
+  getById(id: any) {
+    return this.http.get(this.module + 'GetById/' + id);
+  }
 
-    authenticate(data: any) {
-      return this.http.post(this.module + 'Authenticate', data);
-    }
+  create(data: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post(this.module + 'Create', data, httpOptions);
+  }
 
-    update(data: any) {
-      return this.http.put(this.module + 'Update', data)
-    }
+  authenticate(data: any) {
+    return this.http.post(this.module + 'Authenticate', data);
+  }
+
+  update(data: any) {
+    return this.http.put(this.module + 'Update', data)
+  }
 }

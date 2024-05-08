@@ -68,7 +68,6 @@ namespace Backend.Controllers
         [HttpDelete("Delete")]
         public void Delete()
         {
-            //pega o id do usuario logado
             string id = TokenService.GetValueFromClaim(HttpContext.User.Identity, ClaimTypes.NameIdentifier);
             userService.Delete(id);
         }
