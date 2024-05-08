@@ -14,7 +14,7 @@ import { Interceptor } from "./app.interceptor.module";
 import { UserDataService } from "./data-services/user.data-service";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { CalendarComponent } from "./components/calendar/calendar.component";
-import { MyDataComponent } from "./mydata/mydata.component";
+import { MyDataComponent } from "./components/mydata/mydata.component";
 
 @NgModule({
   declarations: [
