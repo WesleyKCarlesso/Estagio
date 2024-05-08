@@ -2,7 +2,7 @@
 
 namespace Backend.Domain.Interfaces
 {
-    public interface IJobRepository
+    public interface IJobRepository : IRepository<Job>
     {
         IEnumerable<Job> GetAll();
     }

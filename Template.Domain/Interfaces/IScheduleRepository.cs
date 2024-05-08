@@ -2,7 +2,7 @@
 
 namespace Backend.Domain.Interfaces
 {
-    public interface IScheduleRepository
+    public interface IScheduleRepository : IRepository<Schedule>
     {
         IEnumerable<Schedule> GetAll();
     }

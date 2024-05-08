@@ -25,5 +25,50 @@ namespace Backend.Application.Services
 
             return jobsViewModels;
         }
+
+        public void Create(JobViewModel jobViewModel)
+        {
+            Job job = mapper.Map<Job>(jobViewModel);
+
+            jobRepository.Create(job);
+        }
+
+        public JobViewModel GetById(string id)
+        {
+            if (!Guid.TryParse(id, out Guid jobId))
+                throw new Exception("JobId is not valid!");
+
+            Job job = jobRepository.Find(x => x.Id == jobId && !x.IsDeleted);
+
+            if (job == null)
+                throw new Exception("Job not found!");
+
+            return mapper.Map<JobViewModel>(job);
+        }
+
+        public void Update(JobViewModel jobViewModel)
+        {
+            Job job = jobRepository.Find(x => x.Id == jobViewModel.Id && !x.IsDeleted);
+
+            if (job == null)
+                throw new Exception("Usuário não encontrado.");
+
+            job = mapper.Map<Job>(jobViewModel);
+
+            jobRepository.Update(job);
+        }
+
+        public void Delete(string id)
+        {
+            if (!Guid.TryParse(id, out Guid jobId))
+                throw new Exception("JobId is not valid!");
+
+            Job job = jobRepository.Find(x => x.Id == jobId && !x.IsDeleted);
+
+            if (job == null)
+                throw new Exception("Job not found!");
+
+            jobRepository.Delete(job);
+        }
     }
 }
