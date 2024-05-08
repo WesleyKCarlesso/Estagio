@@ -15,6 +15,10 @@ import { UserDataService } from "./data-services/user.data-service";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { CalendarComponent } from "./components/calendar/calendar.component";
 import { MyDataComponent } from "./components/mydata/mydata.component";
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { JobsComponent } from "./jobs/jobs.component";
 
 @NgModule({
@@ -29,6 +33,10 @@ import { JobsComponent } from "./jobs/jobs.component";
   ],
   imports: [
     CommonModule,
+    NgxMaterialTimepickerModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,

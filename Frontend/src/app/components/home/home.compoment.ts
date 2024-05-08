@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { UserDataService } from "../../data-services/user.data-service";
 
 @Component({
   selector: "app-home",
@@ -11,10 +12,13 @@ export class HomeComponent implements OnInit {
   options = ["1", "2", "3", "4"];
   selectedOption = this.options[0];
 
+  constructor(private userDataService: UserDataService) {}
+
   ngOnInit() {
     const userLoggedString = localStorage.getItem("user_logged");
-
     this.isLogged = !!userLoggedString;
+
+    console.log(this.userDataService.getAll());
 
     if (!!userLoggedString) {
       this.isAdmin = JSON.parse(userLoggedString).user.isAdmin;
