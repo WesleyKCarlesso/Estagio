@@ -21,6 +21,5 @@ namespace Backend.Application.ViewModels
         public EnumSex Sex { get; set; }
         public string Phone { get; set; }
         public bool IsAdmin { get; set; }
-        public List<ScheduleViewModel> Schedules { get; set; }
     }
 }
