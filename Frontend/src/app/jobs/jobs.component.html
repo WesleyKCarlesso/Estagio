@@ -15,48 +15,83 @@
         </div>
     </nav>
 </ng-container>
-<div class="container fluid register">
-    <div class="register-container p-5">
+<div class="container fluid jobs">
+    <div *ngIf="showList" class="jobs-container-list p-5">
+        <h2 class="text-center mb-4">Serviços</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Ações</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Duração<br>(minutos)</th>
+                    <th scope="col">Duração do intervalo<br>(minutos)</th>
+                    <th scope="col">Início do intervalo<br>(minutos)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let job of jobs">
+                    <th scope="row">
+                        <button class="btn-primary" (click)="openDetails(job)">Editar</button>
+                        <button class="btn-danger" (click)="delete(job)">Excluir</button>
+                    </th>
+                    <th scope="row">{{job.name}}</th>
+                    <th scope="row">{{job.description}}</th>
+                    <th scope="row">{{job.duration}}</th>
+                    <th scope="row">{{job.intervalDuration}}</th>
+                    <th scope="row">{{job.startInterval}}</th>
+                </tr>
+            </tbody>
+        </table>
+        <div class="btn-container">
+            <button (click)="createNew()" id="btn-create-new" class="btn btn-primary">Criar Novo</button>
+        </div>
+    </div>
+    <div *ngIf="!showList" class="jobs-container p-5">
         <h2 class="text-center mb-4">Registrar</h2>
-        <form (ngSubmit)="registrar()" [formGroup]="registerForm" #formDir="ngForm">
+        <form (ngSubmit)="save()" (reset)="cancel()" [formGroup]="jobsForm" #formDir="ngForm">
             <div class="form-group">
                 <label for="name">Nome</label>
-                <input type="text" class="form-control" id="name" placeholder="Insira seu nome" formControlName="name"
-                    [(ngModel)]="user.Name" name="name">
+                <input type="text" class="form-control" id="name" placeholder="Insira o nome" formControlName="name"
+                    [(ngModel)]="job.name" name="name">
                 <div *ngIf="name.invalid && formDir.submitted" class="validation-error">
                     <p *ngIf="name.errors?.['required']">O nome é obrigatório!</p>
                 </div>
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" class="form-control" id="email" placeholder="Insira seu email"
-                    formControlName="email" [(ngModel)]="user.Email" name="email">
-                <div *ngIf="email.invalid && formDir.submitted" class="validation-error">
-                    <p *ngIf="email.errors?.['required']">O email é obrigatório!</p>
-                    <p *ngIf="email.errors?.['email']">O email está inválido!</p>
+                <label for="description">Descrição</label>
+                <input type="text" class="form-control" id="description" placeholder="Insira a descrição" formControlName="description"
+                    [(ngModel)]="job.description" name="description">
+                <div *ngIf="description.invalid && formDir.submitted" class="validation-error">
+                    <p *ngIf="description.errors?.['required']">O nome é obrigatório!</p>
                 </div>
             </div>
             <div class="form-group">
-                <label for="password">Senha</label>
-                <input type="password" class="form-control" id="password" placeholder="Insira sua senha"
-                    formControlName="password" [(ngModel)]="user.Password" name="password">
-                <div *ngIf="password.invalid && formDir.submitted" class="validation-error">
-                    <p *ngIf="password.errors?.['required']">A senha é obrigatória!</p>
+                <label for="duration">Duração (minutos)</label>
+                <input type="text" class="form-control" id="duration" placeholder="Insira a duração" formControlName="duration"
+                    [(ngModel)]="job.duration" name="duration">
+                <div *ngIf="duration.invalid && formDir.submitted" class="validation-error">
+                    <p *ngIf="duration.errors?.['required']">O nome é obrigatório!</p>
                 </div>
             </div>
             <div class="form-group">
-                <label for="confirmPassword">Confirme a Senha</label>
-                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirme sua senha"
-                    formControlName="confirmPassword">
-                <div *ngIf="formDir.submitted" class="validation-error">
-                    <p *ngIf="confirmPassword.errors?.['required']">A confirmação de senha é obrigatória!</p>
-                    <p *ngIf="registerForm.errors?.['notSame']">As duas senhas não coincidem!</p>
+                <label for="intervalDuration">Duração do intervalo (minutos)</label>
+                <input type="text" class="form-control" id="name" placeholder="Insira a duração do intervalo" formControlName="intervalDuration"
+                    [(ngModel)]="job.intervalDuration" name="intervalDuration">
+                <div *ngIf="intervalDuration.invalid && formDir.submitted" class="validation-error">
+                    <p *ngIf="intervalDuration.errors?.['required']">O nome é obrigatório!</p>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+            <div class="form-group">
+                <label for="startInterval">Início do intervalo (minutos)</label>
+                <input type="text" class="form-control" id="startInterval" placeholder="Insira o início do intervalo" formControlName="startInterval"
+                    [(ngModel)]="job.startInterval" name="startInterval">
+                <div *ngIf="startInterval.invalid && formDir.submitted" class="validation-error">
+                    <p *ngIf="startInterval.errors?.['required']">O nome é obrigatório!</p>
+                </div>
+            </div>
+            <button id="btn-save" type="submit" class="btn btn-primary">Salvar</button>
+            <button type="reset" class="btn btn-secondary">Cancelar</button>
         </form>
-        <div class="text-center mt-3">
-            <p>Já tem uma conta? <a href="/login">Faça login</a></p>
-        </div>
     </div>
 </div>

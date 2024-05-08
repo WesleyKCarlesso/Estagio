@@ -63,7 +63,7 @@ namespace Backend.Controllers
             }
         }
 
-        [HttpDelete("Delete")]
+        [HttpDelete("Delete/{id}")]
         public void Delete(string id)
         {
             jobService.Delete(id);

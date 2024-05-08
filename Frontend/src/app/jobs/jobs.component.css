@@ -1,31 +1,56 @@
-.container.register {
+.container.jobs {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-.register-container {
+.jobs-container-list {
     background-color: #f8f9fa;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
+    width: 300vh;
     padding: 30px;
-    box-sizing: border-box; /* Adicionado */
+    box-sizing: border-box;
 }
 
-.register-container h2 {
+.jobs-container {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 50vh;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.jobs-container h2 {
     color: #343a40;
+}
+
+.form-group {
+    margin-top: 10px;
 }
 
 .form-group label {
     color: #343a40;
 }
 
+#btn-save {    
+    margin-top: 20px;
+    margin-left: 20%;
+    width: 100px;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
 .btn-primary {
     background-color: #28a745;
     border-color: #28a745;
-    margin-top: 20px;
 }
 
 .btn-primary:hover {
@@ -33,10 +58,17 @@
     border-color: #218838;
 }
 
-.btn-block {
-    display: inline;
-    margin-left: 30%;
-    width: 35%;
+.btn-secondary {
+    background-color: #c73117;
+    border-color: #c73117;
+    margin-left: 10%;
+    width: 100px;
+    margin-top: 20px;
+}
+
+.btn-secondary:hover {
+    background-color: #962511;
+    border-color: #962511;
 }
 
 .service {
