@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { JobsComponent } from "./jobs/jobs.component";
+import { ScheduleDataService } from "./data-services/schedule.data-service";
 
 @NgModule({
   declarations: [
@@ -57,7 +58,7 @@ import { JobsComponent } from "./jobs/jobs.component";
     ]),
     Interceptor,
   ],
-  providers: [UserDataService],
+  providers: [UserDataService, ScheduleDataService],
   exports: [RouterModule],
   bootstrap: [AppComponent],
 })
