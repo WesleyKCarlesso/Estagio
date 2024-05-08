@@ -17,7 +17,6 @@ export class ScheduleDataService {
             'Content-Type': 'application/json'
           })
         };
-        console.log(data)
         return this.http.post(this.module + 'Create', data, httpOptions);
     }
 

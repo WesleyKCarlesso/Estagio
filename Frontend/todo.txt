@@ -1,8 +1,7 @@
-modificar navbar tbm
-quando esta logado, o login redireciona para config de user
 mudar para lista de servicos, etc, ao invez de texto para duracoes
 mandar msg no zapzap de confirmacao
-cria tres dropdowns, um com o serviço, outro com o dia e outro com os horarios disponiveis, baseado no dia e no serviço
 n da pra marcar no horairo q ja existe, claro, pra n dar conflito
-tirar previous, today, etc... sempre week
 se n for admin, mostrar so do usuario logado
+quando o id for diferente do o proprio usuario, nao pode arrastar
+quando arrastar n pode aumentar tamanho
+n deixar colocar no msm dia

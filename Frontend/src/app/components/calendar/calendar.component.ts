@@ -1,4 +1,5 @@
 import {
+  Input,
   Component,
   ChangeDetectionStrategy,
   ViewChild,
@@ -56,9 +57,7 @@ const colors: Record<string, EventColor> = {
   templateUrl: "calendar.component.html",
 })
 export class CalendarComponent {
-  view: CalendarView = CalendarView.Month;
-
-  CalendarView = CalendarView;
+  @Input() events: CalendarEvent[] = [];
 
   viewDate: Date = new Date();
 
@@ -82,11 +81,10 @@ export class CalendarComponent {
 
   refresh = new Subject<void>();
 
-  events: CalendarEvent[] = [];
-
   activeDayIsOpen: boolean = true;
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    console.log(this.events)
     if (isSameMonth(date, this.viewDate)) {
       if (
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
@@ -123,23 +121,6 @@ export class CalendarComponent {
     console.log(action, event);
   }
 
-  addEvent(title: string, start: Date): void {
-    this.events = [
-      ...this.events,
-      {
-        title: "New event",
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: { primary: "#ff0000", secondary: "#ff0000" },
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
-  }
-
   addEventWithParams(data: any): void {
     this.events = [
       ...this.events,
@@ -159,10 +140,6 @@ export class CalendarComponent {
 
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter((event) => event !== eventToDelete);
-  }
-
-  setView(view: CalendarView) {
-    this.view = view;
   }
 
   closeOpenMonthViewDay() {
