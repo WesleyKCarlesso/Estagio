@@ -1,28 +1,17 @@
-<div *ngIf="isLogged">
+<div *ngIf="!isLogged">
     <ng-container>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarTogglerDemo01"
-                    aria-controls="navbarTogglerDemo01"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
                     <a href="/login" id="person">
-                        <img
-                            src="../../assets/images/person.png"
-                            alt="Ícone"
-                            height="50"
-                            class="d-inline-block align-top"
-                            title="Fazer Login"
-                        />
+                        <img src="../../assets/images/person.png" alt="Ícone" height="50"
+                            class="d-inline-block align-top" title="Fazer Login" />
                         <span id="person-label">Fazer Login</span>
                     </a>
                 </div>
@@ -44,60 +33,53 @@
     </div>
 </div>
 
-<div *ngIf="!isLogged">
+<div *ngIf="isLogged">
     <ng-container>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarTogglerDemo01"
-                    aria-controls="navbarTogglerDemo01"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
+        <div class="container-fluid">
+            <div class="d-flex justify-content-end" style="padding: 10px 0;"> <!-- Aligns button to the right -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-                    <a href="/mydata" id="person">
-                        <img
-                            src="../../assets/images/person.png"
-                            alt="Ícone"
-                            height="50"
-                            class="d-inline-block align-top"
-                            title="Fazer Login"
-                        />
-                        <span id="person-label">Meus Dados</span>
-                    </a>
-                </div>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+                <a href="/mydata" id="person">
+                    <img src="../../assets/images/person.png" alt="Ícone" height="50" class="d-inline-block align-top"
+                        title="Fazer Login" />
+                    <span id="person-label">Meus Dados</span>
+                </a>
             </div>
-        </nav>
+        </div>
     </ng-container>
 
     <div class="container-fluid" style="padding: 0">
-        <div class="row justify-content-center align-items-center">
-            <div class="col" style="padding: 0">
-                <div>
-                    <div class="home-overlay"></div>
-                </div>
-
-                <div class="content">
-                    <div>
-                        <label for="dropdown">Select an option:</label>
-                        <select id="dropdown" [(ngModel)]="selectedOption">
-                            <option
-                                *ngFor="let option of options"
-                                [value]="option"
-                            >
-                                {{ option }}
-                            </option>
-                        </select>
-                        <p>You selected: {{ selectedOption }}</p>
+        <div class="row justify-content-center align-items-center" style="height: 100vh;">
+            <div class="col-md-6"> <!-- Adjust col size as needed -->
+                <div class="home-overlay">
+                    <div class="content">
+                        <div>
+                            <label for="dropdown">Select an option:</label>
+                            <select id="dropdown" [(ngModel)]="selectedOption">
+                                <option *ngFor="let option of options" [value]="option">
+                                    {{ option }}
+                                </option>
+                            </select>
+                            <p>You selected: {{ selectedOption }}</p>
+                        </div>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Choose a date</mat-label>
+                            <input matInput [matDatepicker]="picker">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        <input [ngxTimepicker]="myTimepicker" placeholder="Choose time" readonly>
+                        <ngx-material-timepicker #myTimepicker></ngx-material-timepicker>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                        <hr style="color: black;" />
+                        <app-calendar></app-calendar>
                     </div>
-
-                    <app-calendar></app-calendar>
                 </div>
             </div>
         </div>

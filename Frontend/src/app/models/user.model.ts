@@ -1,4 +1,3 @@
-// user.model.ts
 import { Schedule } from "./schedule.model";
 
 export enum EnumSex {
