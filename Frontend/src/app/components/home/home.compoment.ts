@@ -7,6 +7,7 @@ import { Component, OnInit } from "@angular/core";
 })
 export class HomeComponent implements OnInit {
   isLogged: boolean = false;
+  isAdmin: boolean = false;
   options = ["1", "2", "3", "4"];
   selectedOption = this.options[0];
 
@@ -14,6 +15,10 @@ export class HomeComponent implements OnInit {
     const userLoggedString = localStorage.getItem("user_logged");
 
     this.isLogged = !!userLoggedString;
+
+    if (!!userLoggedString) {
+      this.isAdmin = JSON.parse(userLoggedString).user.isAdmin;
+    }
   }
 
   onDropdownChange(option: string) {

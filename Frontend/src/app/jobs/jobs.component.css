@@ -1,0 +1,64 @@
+.container.register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.register-container {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    padding: 30px;
+    box-sizing: border-box; /* Adicionado */
+}
+
+.register-container h2 {
+    color: #343a40;
+}
+
+.form-group label {
+    color: #343a40;
+}
+
+.btn-primary {
+    background-color: #28a745;
+    border-color: #28a745;
+    margin-top: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #218838;
+    border-color: #218838;
+}
+
+.btn-block {
+    display: inline;
+    margin-left: 30%;
+    width: 35%;
+}
+
+.service {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.service input {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.service button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.service button:hover {
+    background-color: #c82333;
+}

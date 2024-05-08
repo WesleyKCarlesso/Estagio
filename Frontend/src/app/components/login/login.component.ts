@@ -18,21 +18,9 @@ export class LoginComponent implements OnInit {
   constructor(private userDataService: UserDataService, private snackBarService: SnackBarService, private router: Router) {}
 
   ngOnInit() {
-    this.getTest();
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required])
-    });
-  }
-
-  getTest() {
-    this.userDataService.getAll().subscribe({
-      next: (data: any) => {
-        debugger;
-      },
-      error: (error) => {
-        debugger;
-      }
     });
   }
 

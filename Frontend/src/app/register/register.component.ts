@@ -52,6 +52,10 @@ export class RegisterComponent {
       return;
     }
 
+    this.user.schedules = [];
+    this.user.sex = 2;
+    this.user.phone = '43999999999';
+
     this.userDataService.create(this.user).subscribe({
       next: () => {
         this.snackBarService.openSnackBar('Usuário cadastrado com sucesso!', "Entendido");

@@ -1,4 +1,4 @@
-<div *ngIf="isLogged">
+<div *ngIf="!isLogged">
     <ng-container>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -44,7 +44,7 @@
     </div>
 </div>
 
-<div *ngIf="!isLogged">
+<div *ngIf="isLogged">
     <ng-container>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -61,7 +61,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-                    <a href="/mydata" id="person">
+                    <a *ngIf="!isAdmin" href="/mydata" id="person">
                         <img
                             src="../../assets/images/person.png"
                             alt="Ícone"
@@ -70,6 +70,16 @@
                             title="Fazer Login"
                         />
                         <span id="person-label">Meus Dados</span>
+                    </a>                    
+                    <a *ngIf="isAdmin" href="/jobs" id="person">
+                        <img
+                            src="../../assets/images/tools.png"
+                            alt="Ícone"
+                            height="50"
+                            class="d-inline-block align-top"
+                            title="Serviços"
+                        />
+                        <span id="person-label">Serviços</span>
                     </a>
                 </div>
             </div>

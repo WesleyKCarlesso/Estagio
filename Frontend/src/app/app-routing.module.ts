@@ -15,6 +15,7 @@ import { UserDataService } from "./data-services/user.data-service";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { CalendarComponent } from "./components/calendar/calendar.component";
 import { MyDataComponent } from "./components/mydata/mydata.component";
+import { JobsComponent } from "./jobs/jobs.component";
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MyDataComponent } from "./components/mydata/mydata.component";
     RegisterComponent,
     CalendarComponent,
     MyDataComponent,
+    JobsComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +43,7 @@ import { MyDataComponent } from "./components/mydata/mydata.component";
       { path: "login", component: LoginComponent },
       { path: "register", component: RegisterComponent },
       { path: "mydata", component: MyDataComponent },
+      { path: "jobs", component: JobsComponent },
       { path: "", redirectTo: "/home", pathMatch: "full" },
       { path: "**", redirectTo: "/home", pathMatch: "full" },
     ]),
