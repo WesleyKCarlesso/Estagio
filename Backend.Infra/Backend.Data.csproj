@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Template.Domain\Backend.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

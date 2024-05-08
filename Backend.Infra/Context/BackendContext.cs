@@ -1,5 +1,4 @@
 ﻿using Backend.Data.Extensions;
-using Backend.Data.Mappings;
 using Backend.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,12 +12,16 @@ namespace Backend.Data.Context
         #region "DBSets"
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<Job> Jobs { get; set; }
 
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserMap());
+            modelBuilder.ApplyConfiguration(new ScheduleMap());
+            modelBuilder.ApplyConfiguration(new JobMap());
 
             modelBuilder.SeedData();
 

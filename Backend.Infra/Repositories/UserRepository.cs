@@ -15,8 +15,7 @@ namespace Backend.Data.Repositories
 
         public IEnumerable<User> GetAll()
         {
-            return Query(x => !x.IsDeleted);
+            return Query(x => !x.IsDeleted).Include(x => x.Schedules);
         }
     }
-
 }

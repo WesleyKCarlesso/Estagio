@@ -1,27 +1,22 @@
 ﻿using Backend.Domain.Entities;
-using Backend.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Backend.Data.Mappings
+public class UserMap : IEntityTypeConfiguration<User>
 {
-    public class UserMap : IEntityTypeConfiguration<User>
+    public void Configure(EntityTypeBuilder<User> builder)
     {
-        public void Configure(EntityTypeBuilder<User> builder)
-        {
-            builder.HasKey(x => x.Id);
+        builder.HasKey(u => u.Id); // Supondo que 'Id' seja a chave primária
+        builder.Property(u => u.Name).IsRequired();
+        builder.Property(u => u.Email).IsRequired().HasMaxLength(100);
+        builder.Property(u => u.Password).IsRequired().HasMaxLength(100);
+        builder.Property(u => u.IsAdmin).IsRequired();
+        builder.Property(u => u.Sex).IsRequired();
+        builder.Property(u => u.Phone).IsRequired().HasMaxLength(15);
 
-            builder.Property(x => x.Id).IsRequired();
-            builder.Property(x => x.Name).IsRequired();
-            builder.Property(x => x.Password).IsRequired();
-            builder.Property(x => x.IsAdmin).HasDefaultValue(false).IsRequired();
-            builder.Property(x => x.Password).IsRequired();
-            builder.Property(x => x.Sex).HasDefaultValue(EnumSex.Other).IsRequired();
-        }
+        // Relacionamento com Schedule
+        builder.HasMany(u => u.Schedules)
+             .WithOne(s => s.User)
+             .HasForeignKey(s => s.UserId); // Supondo que 'UserId' seja a chave estrangeira na tabela Schedule
     }
 }

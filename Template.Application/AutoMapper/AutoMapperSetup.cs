@@ -15,12 +15,16 @@ namespace Backend.Application.AutoMapper
             #region ViewModelToDomain
 
             CreateMap<UserViewModel, User>();
+            CreateMap<ScheduleViewModel, Schedule>();
+            CreateMap<JobViewModel, Job>();
 
             #endregion
 
             #region DomainToViewModel
 
             CreateMap<User, UserViewModel>();
+            CreateMap<Schedule, ScheduleViewModel>();
+            CreateMap<Job, JobViewModel>();
 
             #endregion
         }

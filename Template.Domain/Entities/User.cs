@@ -11,5 +11,6 @@ namespace Backend.Domain.Entities
         public bool IsAdmin { get; set; }
         public EnumSex Sex { get; set; }
         public string Phone { get; set; }
+        public List<Schedule> Schedules { get; set; }
     }
 }

@@ -7,10 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Diagnostics.Metrics;
-using System.Reflection.Metadata;
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
+using System.Text.Json.Serialization;
 
 internal class Program
 {
@@ -20,7 +18,7 @@ internal class Program
 
         var allowAngularApp = "AllowAngularApp";
 
-        builder.Services.AddControllers();
+        builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
         builder.Services.AddDbContext<BackendContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("BackendDB")).EnableSensitiveDataLogging());
         NativeInjector.RegisterServices(builder.Services);

@@ -13,12 +13,16 @@ namespace Backend.IoC
             #region Services
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IScheduleService, ScheduleService>();
+            services.AddScoped<IJobService, JobService>();
 
             #endregion
 
             #region Repositories
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IScheduleRepository, ScheduleRepository>();
+            services.AddScoped<IJobRepository, JobRepository>();
 
             #endregion
         }

@@ -4,6 +4,7 @@ using Backend.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Data.Migrations
 {
     [DbContext(typeof(BackendContext))]
-    partial class BackendContextModelSnapshot : ModelSnapshot
+    [Migration("20240508001251_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,18 +54,6 @@ namespace Backend.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Jobs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("2698a901-205b-49ef-b1f2-0b0da19e2204"),
-                            Description = "Default Job Description",
-                            Duration = 60,
-                            IntervalDuration = 30,
-                            IsDeleted = false,
-                            Name = "Job Default",
-                            StartInterval = 0
-                        });
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Schedule", b =>
@@ -90,16 +81,6 @@ namespace Backend.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Schedules");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("eb2db68d-fa7e-4bf4-a5a3-a794b2b2c9be"),
-                            IsDeleted = false,
-                            JobId = new Guid("2698a901-205b-49ef-b1f2-0b0da19e2204"),
-                            ServiceDate = new DateTime(2024, 5, 7, 21, 42, 23, 776, DateTimeKind.Local).AddTicks(7487),
-                            UserId = new Guid("d12eed0f-c2a7-4cf4-82ff-2e02db4ad1d3")
-                        });
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.User", b =>
@@ -139,19 +120,6 @@ namespace Backend.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("d12eed0f-c2a7-4cf4-82ff-2e02db4ad1d3"),
-                            Email = "email@backend.com",
-                            IsAdmin = false,
-                            IsDeleted = false,
-                            Name = "User Default",
-                            Password = "GenericPassword",
-                            Phone = "99 999999999",
-                            Sex = 2
-                        });
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Schedule", b =>
