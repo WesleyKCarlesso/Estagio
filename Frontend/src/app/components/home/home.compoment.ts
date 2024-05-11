@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit {
 
     this.isLogged = !!userLoggedString;
 
-
     console.log('data inicial')
     console.log(this.date)
     if (!!userLoggedString) {
@@ -59,34 +58,34 @@ export class HomeComponent implements OnInit {
           console.log(this.userId)
           console.log(element.userId)
           if (this.userId != element.userId) {
-          this.events.push(
-            {
-              start: (new Date(element.serviceDate)),
-              end: (new Date(element.serviceDate)),
-              resizable: {
-                beforeStart: false,
-                afterEnd: false
-              },
-              draggable: false,
-              color: { primary: 'ff0000', secondary: '#ff0000' },
-              title: 'test'
-            }
-          )
+            this.events.push(
+              {
+                start: (new Date(element.serviceDate)),
+                end: (new Date(element.serviceDate)),
+                resizable: {
+                  beforeStart: false,
+                  afterEnd: false
+                },
+                draggable: false,
+                color: { primary: 'ff0000', secondary: '#ff0000' },
+                title: 'test'
+              }
+            )
           }
           else {
-          this.events.push(
-            {
-              start: (new Date(element.serviceDate)),
-              end: (new Date(element.serviceDate)),
-              resizable: {
-                beforeStart: false,
-                afterEnd: false
-              },
-              draggable: true,
-              color: { primary: '00ff00', secondary: '#00ff00' },
-              title: 'test'
-            }
-          )
+            this.events.push(
+              {
+                start: (new Date(element.serviceDate)),
+                end: (new Date(element.serviceDate)),
+                resizable: {
+                  beforeStart: false,
+                  afterEnd: false
+                },
+                draggable: true,
+                color: { primary: '00ff00', secondary: '#00ff00' },
+                title: 'test'
+              }
+            )
           }
         }
       });

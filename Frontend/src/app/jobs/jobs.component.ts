@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { JobDataService } from '../data-services/job.data-service';
 import { SnackBarService } from '../data-services/snack-bar.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -24,10 +24,46 @@ export class JobsComponent {
     this.jobsForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
-      duration: new FormControl('', [Validators.required]),
-      intervalDuration: new FormControl('', [Validators.required]),
-      startInterval: new FormControl('', [Validators.required])
-    });
+      duration: new FormControl('', [
+        Validators.required,
+        this.rangeValidator(0, 500)
+      ]),
+      intervalDuration: new FormControl('', [
+        Validators.required,
+        this.rangeValidator(0, 500)
+      ]),
+      startInterval: new FormControl('', [
+        Validators.required,
+        this.rangeValidator(0, 500)
+      ])
+    }, { validators: this.checkTimes });
+  }
+
+  checkTimes: ValidatorFn = (group: AbstractControl):  ValidationErrors | null =>  {
+    let duration = group.get('duration')?.value;
+    let intervalDuration = group.get('intervalDuration')?.value;
+    let startInterval = group.get('startInterval')?.value;
+
+    var valid = true;
+
+    if (intervalDuration > duration || startInterval > duration) {
+      valid = false;
+    }
+    if ((startInterval + intervalDuration) > duration) {
+      valid = false;
+    }
+
+    return true ? null : { invalidTimes: true }
+  }
+  
+  rangeValidator(min: number, max: number): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const value = control.value;
+      if (value !== null && (value < min || value > max)) {
+        return { 'rangeError': { value } };
+      }
+      return null;
+    };
   }
 
   getAll() {
@@ -70,6 +106,10 @@ export class JobsComponent {
   }
 
   save() {
+    if (this.jobsForm.invalid) {
+      return;
+    }
+
     if (this.isNew) {
       this.jobDataService.create(this.job).subscribe({
         next: () => { 

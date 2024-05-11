@@ -33,6 +33,10 @@ export class LoginComponent implements OnInit {
   }
 
   authenticate() {
+    if (this.loginForm.invalid) {
+      return;
+    }
+
     this.userDataService.authenticate(this.user).subscribe({
       next: (data: any) => {
         this.snackBarService.openSnackBar('Login realizado com sucesso.', "Entendido");

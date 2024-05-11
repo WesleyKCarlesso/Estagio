@@ -1,5 +1,4 @@
-<a></a>
-<!--<ng-container>
+<ng-container>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
@@ -69,26 +68,29 @@
             </div>
             <div class="form-group">
                 <label for="duration">Duração (minutos)</label>
-                <input type="text" class="form-control" id="duration" placeholder="Insira a duração" formControlName="duration"
+                <input type="number" max="500" min="0" class="form-control" id="duration" placeholder="Insira a duração" formControlName="duration"
                     [(ngModel)]="job.duration" name="duration">
                 <div *ngIf="duration.invalid && formDir.submitted" class="validation-error">
                     <p *ngIf="duration.errors?.['required']">O nome é obrigatório!</p>
+                    <p *ngIf="duration.errors?.['rangeError']">O valor deve estar entre 0 e 500.</p>
                 </div>
             </div>
             <div class="form-group">
                 <label for="intervalDuration">Duração do intervalo (minutos)</label>
-                <input type="text" class="form-control" id="name" placeholder="Insira a duração do intervalo" formControlName="intervalDuration"
+                <input type="number" max="500" min="0" class="form-control" id="name" placeholder="Insira a duração do intervalo" formControlName="intervalDuration"
                     [(ngModel)]="job.intervalDuration" name="intervalDuration">
                 <div *ngIf="intervalDuration.invalid && formDir.submitted" class="validation-error">
                     <p *ngIf="intervalDuration.errors?.['required']">O nome é obrigatório!</p>
+                    <p *ngIf="intervalDuration.errors?.['rangeError']">O valor deve estar entre 0 e 500.</p>
                 </div>
             </div>
             <div class="form-group">
                 <label for="startInterval">Início do intervalo (minutos)</label>
-                <input type="text" class="form-control" id="startInterval" placeholder="Insira o início do intervalo" formControlName="startInterval"
+                <input type="number" max="500" min="0" class="form-control" id="startInterval" placeholder="Insira o início do intervalo" formControlName="startInterval"
                     [(ngModel)]="job.startInterval" name="startInterval">
                 <div *ngIf="startInterval.invalid && formDir.submitted" class="validation-error">
                     <p *ngIf="startInterval.errors?.['required']">O nome é obrigatório!</p>
+                    <p *ngIf="startInterval.errors?.['rangeError']">O valor deve estar entre 0 e 500.</p>
                 </div>
             </div>
             <button id="btn-save" type="submit" class="btn btn-primary">Salvar</button>
@@ -96,4 +98,3 @@
         </form>
     </div>
 </div>
--->
