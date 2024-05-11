@@ -5,3 +5,5 @@ se n for admin, mostrar so do usuario logado
 quando o id for diferente do o proprio usuario, nao pode arrastar
 quando arrastar n pode aumentar tamanho
 n deixar colocar no msm dia
+testar atividade com intervalo
+arrumar estilos da tela, colocar em 24h

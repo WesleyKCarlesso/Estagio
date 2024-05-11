@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { ScheduleDataService } from "../../data-services/schedule.data-service";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 import { CalendarEvent } from "angular-calendar";
-import { endOfDay, startOfDay } from "date-fns";
 
 @Component({
   selector: "app-home",
@@ -26,7 +25,7 @@ export class HomeComponent implements OnInit {
     const userLoggedString = localStorage.getItem("user_logged");
 
     this.isLogged = !!userLoggedString;
-
+    console.log(this.isLogged)
 
     console.log('data inicial')
     console.log(this.date)

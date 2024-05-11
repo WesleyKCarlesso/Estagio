@@ -59,6 +59,8 @@ const colors: Record<string, EventColor> = {
 export class CalendarComponent {
   @Input() events: CalendarEvent[] = [];
 
+  locale: Intl.Locale = new Intl.Locale("pt-BR")
+
   viewDate: Date = new Date();
 
   actions: CalendarEventAction[] = [
