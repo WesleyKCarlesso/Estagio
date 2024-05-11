@@ -53,7 +53,7 @@ export class RegisterComponent {
 
     this.user.schedules = [];
     this.user.sex = 2;
-    this.user.phone = '43999999999';
+    this.user.phone = '';
 
     this.userDataService.create(this.user).subscribe({
       next: () => {

@@ -53,6 +53,9 @@ namespace Backend.Application.Services
             if (schedule == null)
                 throw new Exception("Usuário não encontrado.");
 
+            scheduleViewModel.JobId = schedule.JobId;
+            scheduleViewModel.UserId = schedule.UserId;
+
             schedule = mapper.Map<Schedule>(scheduleViewModel);
 
             scheduleRepository.Update(schedule);
