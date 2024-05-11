@@ -41,20 +41,8 @@ const colors: Record<string, EventColor> = {
 
 @Component({
   selector: "app-calendar",
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [
-    `
-      h3 {
-        margin: 0 0 10px;
-      }
-
-      pre {
-        background-color: #f5f5f5;
-        padding: 15px;
-      }
-    `,
-  ],
-  templateUrl: "calendar.component.html",
+  templateUrl: "./calendar.component.html",
+  styleUrls: ["./calendar.component.css"],
 })
 export class CalendarComponent {
   @Input() events: CalendarEvent[] = [];
