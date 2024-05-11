@@ -64,8 +64,8 @@
                         <div>
                             <label for="dropdown">Select an option:</label>
                             <select id="dropdown" (change)="onDropdownChange($event)" [(ngModel)]="selectedOption">
-                                <option *ngFor="let option of options" [value]="option">
-                                    {{ option }}
+                                <option *ngFor="let option of options" [value]="option.name">
+                                    {{ option.name }}
                                 </option>
                             </select>
                         </div>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ScheduleDataService } from "../../data-services/schedule.data-service";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
+import { JobDataService } from "../../data-services/job.data-service";
 import { CalendarEvent } from "angular-calendar";
-import { endOfDay, startOfDay } from "date-fns";
 
 @Component({
   selector: "app-home",
@@ -12,20 +12,27 @@ import { endOfDay, startOfDay } from "date-fns";
 export class HomeComponent implements OnInit {
   isLogged: boolean = false;
   isAdmin: boolean = false;
-  options = ["1", "2", "3", "4"];
-  selectedOption = this.options[0];
+  options: any = [];
+  selectedOption: String = '';
   selectedTime: string = '';
   date: Date = new Date()
   userId: string = ''
   snackBarService: any;
   events: CalendarEvent[] = []
 
-  constructor(private scheduleDataService: ScheduleDataService) { }
+  constructor(private scheduleDataService: ScheduleDataService, private jobDataServce: JobDataService) { }
 
   ngOnInit() {
     const userLoggedString = localStorage.getItem("user_logged");
+    this.jobDataServce.getAll().subscribe((data: any) => {
+      data.forEach((element: any) => {
+        this.options.push(element)
+      }
+      )
+    })
 
     this.isLogged = !!userLoggedString;
+    console.log(this.isLogged)
 
     console.log('data inicial')
     console.log(this.date)
