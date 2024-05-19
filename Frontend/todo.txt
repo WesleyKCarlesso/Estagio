@@ -1,5 +1,6 @@
 mandar msg no zapzap de confirmacao
+
 n deixar colocar no msm dia
-colocar em 24h
 testar atividade com intervalo
 testar se n da pra marcar no horairo q ja existe, claro, pra n dar conflito
+label tem q ser cliente e trabalho

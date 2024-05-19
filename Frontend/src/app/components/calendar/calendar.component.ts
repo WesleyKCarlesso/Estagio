@@ -95,23 +95,18 @@ export class CalendarComponent {
     newStart,
     newEnd,
   }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map((iEvent) => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
-      }
-      return iEvent;
-    });
+    console.log(event)
+    event.end = newEnd
+    event.end?.setHours(event.end.getHours() - 3)
     this.handleEvent("Dropped or resized", event);
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
+    console.log(action)
+    console.log(event)
     this.scheduleDataService.update({
       "id": event.id,
-      "serviceDate": event.start
+      "serviceDate": event.end
     }).subscribe({
       next: (data: any) => {
       },
