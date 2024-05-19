@@ -31,4 +31,8 @@ export class UserDataService {
   update(data: any) {
     return this.http.put(this.module + 'Update', data)
   }
+
+  updateObservation(userId: string, observation: string) {
+    return this.http.put(this.module + 'UpdateObservation/?userId=' + userId + '&observation=' + observation, {})
+  }
 }

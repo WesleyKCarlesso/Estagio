@@ -1,11 +1,11 @@
-.container.jobs {
+.container.observations {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-.jobs-container-list {
+.observations-container-list {
     background-color: #f8f9fa;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -14,7 +14,7 @@
     box-sizing: border-box;
 }
 
-.jobs-container {
+.observations-container {
     background-color: #f8f9fa;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -23,7 +23,7 @@
     box-sizing: border-box;
 }
 
-.jobs-container h2 {
+.observations-container h2 {
     color: #343a40;
 }
 
@@ -38,7 +38,6 @@
 #btn-save {    
     margin-top: 20px;
     margin-left: 20%;
-    margin-right: 0px;
     width: 100px;
 }
 
@@ -52,7 +51,6 @@
 .btn-primary {
     background-color: #28a745;
     border-color: #28a745;
-    margin-right: 5px;
 }
 
 .btn-primary:hover {

@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-jobs',
   templateUrl: './jobs.component.html',
-  styleUrl: './jobs.component.css'
+  styleUrls: ['./jobs.component.css']
 })
 export class JobsComponent {
   job: any = {};
@@ -15,6 +15,7 @@ export class JobsComponent {
   jobsForm!: FormGroup;
   showList: boolean = true;
   isNew: boolean = false;
+  originalJob: any = {}; // Adicionado para armazenar a cópia dos dados originais
 
   constructor(private jobDataService: JobDataService, private snackBarService: SnackBarService, private router: Router) { }
 
@@ -115,7 +116,7 @@ export class JobsComponent {
         next: () => { 
           this.snackBarService.openSnackBar("Serviço criado com sucesso.", "Entendido");
           
-          this.showList = false;
+          this.showList = true;
           this.job = {};
           this.getAll();
         },
@@ -135,7 +136,7 @@ export class JobsComponent {
         next: () => { 
           this.snackBarService.openSnackBar("Serviço atualizado com sucesso.", "Entendido");
           
-          this.showList = false;
+          this.showList = true;
           this.job = {};
           this.getAll();
         },
@@ -156,17 +157,22 @@ export class JobsComponent {
   createNew() {
     this.showList = false;
     this.isNew = true;
+    this.jobsForm.reset();
   }
 
   cancel() {
+    if (this.isNew) {
+      this.jobsForm.reset();
+    } else {
+      this.jobsForm.patchValue(this.originalJob);
+    }
     this.showList = true;
-    this.job = [];
   }
 
   openDetails(job: any) {
     this.showList = false;
-    this.job = job;
     this.isNew = false;
+    this.originalJob = { ...job }; // Salva uma cópia dos dados originais
 
     this.jobsForm.patchValue({
       name: job.name,
@@ -182,7 +188,7 @@ export class JobsComponent {
       next: () => { 
         this.snackBarService.openSnackBar("Serviço deletado com sucesso.", "Entendido");
         
-        this.showList = false;
+        this.showList = true;
         this.job = {};
         this.getAll();
       },

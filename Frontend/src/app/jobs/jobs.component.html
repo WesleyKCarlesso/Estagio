@@ -21,25 +21,25 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Ações</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Descrição</th>
                     <th scope="col">Duração<br>(minutos)</th>
                     <th scope="col">Duração do intervalo<br>(minutos)</th>
                     <th scope="col">Início do intervalo<br>(minutos)</th>
+                    <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let job of jobs">
-                    <th scope="row">
-                        <button class="btn-primary" (click)="openDetails(job)">Editar</button>
-                        <button class="btn-danger" (click)="delete(job)">Excluir</button>
-                    </th>
                     <th scope="row">{{job.name}}</th>
                     <th scope="row">{{job.description}}</th>
                     <th scope="row">{{job.duration}}</th>
                     <th scope="row">{{job.intervalDuration}}</th>
                     <th scope="row">{{job.startInterval}}</th>
+                    <th scope="row">
+                        <button class="btn btn-primary" (click)="openDetails(job)">Editar</button>
+                        <button class="btn btn-danger" (click)="delete(job)">Excluir</button>
+                    </th>
                 </tr>
             </tbody>
         </table>
@@ -94,7 +94,7 @@
                 </div>
             </div>
             <button id="btn-save" type="submit" class="btn btn-primary">Salvar</button>
-            <button type="reset" class="btn btn-secondary">Cancelar</button>
+            <button type="button" class="btn btn-secondary" (click)="cancel()">Cancelar</button>
         </form>
     </div>
 </div>

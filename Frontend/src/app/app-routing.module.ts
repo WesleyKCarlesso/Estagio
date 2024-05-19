@@ -22,6 +22,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { JobsComponent } from "./jobs/jobs.component";
 import { ScheduleDataService } from "./data-services/schedule.data-service";
 import { JobDataService } from "./data-services/job.data-service";
+import { ObservationsComponent } from "./observations/observations.component";
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { JobDataService } from "./data-services/job.data-service";
     CalendarComponent,
     MyDataComponent,
     JobsComponent,
+    ObservationsComponent
   ],
   imports: [
     CommonModule,
@@ -54,6 +56,7 @@ import { JobDataService } from "./data-services/job.data-service";
       { path: "register", component: RegisterComponent },
       { path: "mydata", component: MyDataComponent },
       { path: "jobs", component: JobsComponent },
+      { path: "observations", component: ObservationsComponent },
       { path: "", redirectTo: "/home", pathMatch: "full" },
       { path: "**", redirectTo: "/home", pathMatch: "full" },
     ]),

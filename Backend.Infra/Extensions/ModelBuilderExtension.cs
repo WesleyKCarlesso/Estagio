@@ -30,6 +30,7 @@ namespace Backend.Data.Extensions
                 Name = "User Default",
                 Email = "email@backend.com",
                 Password = "GenericPassword",
+                Observation = "GenericObservation",
                 IsAdmin = false,
                 Sex = EnumSex.Other,
                 Phone = "99 999999999"

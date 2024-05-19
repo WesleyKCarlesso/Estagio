@@ -10,6 +10,7 @@ public class UserMap : IEntityTypeConfiguration<User>
         builder.Property(u => u.Name).IsRequired();
         builder.Property(u => u.Email).IsRequired().HasMaxLength(100);
         builder.Property(u => u.Password).IsRequired().HasMaxLength(100);
+        builder.Property(u => u.Observation).IsRequired();
         builder.Property(u => u.IsAdmin).IsRequired();
         builder.Property(u => u.Sex).IsRequired();
         builder.Property(u => u.Phone).IsRequired().HasMaxLength(15);

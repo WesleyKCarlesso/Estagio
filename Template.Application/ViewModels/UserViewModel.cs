@@ -18,6 +18,7 @@ namespace Backend.Application.ViewModels
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
+        public string Observation { get; set; }
         public EnumSex Sex { get; set; }
         public string Phone { get; set; }
         public bool IsAdmin { get; set; }

@@ -1,0 +1,44 @@
+<ng-container>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                </ul>
+                <a href="/" id="back-button">
+                    <span id="back-button-label">Voltar</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</ng-container>
+<div class="container fluid observations">
+    <div class="observations-container-list p-5">
+        <h2 class="text-center mb-4">Observações</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" class="col-2">Nome</th>
+                    <th scope="col" class="col-2">Descrição</th>
+                    <th scope="col" class="col-5">Observação</th>
+                    <th scope="col" class="col-1">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <th scope="row">{{ user.name }}</th>
+                    <th scope="row">{{ user.email }}</th>
+                    <th scope="row">
+                        <input type="text" [(ngModel)]="user.observation" class="form-control" placeholder="Observação">
+                    </th>
+                    <th scope="row">
+                        <button class="btn btn-primary" (click)="saveObservation(user)">Salvar</button>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

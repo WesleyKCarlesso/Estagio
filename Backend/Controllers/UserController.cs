@@ -72,6 +72,17 @@ namespace Backend.Controllers
             userService.Delete(id);
         }
 
+        [HttpPut("UpdateObservation")]
+        public IActionResult UpdateObservation(string userId, string observation)
+        {
+            var user = userService.GetById(userId);
+            
+            user.Observation = observation;
+
+            userService.Update(user);
+            return Ok();
+        }
+
         [HttpPost("Authenticate"), AllowAnonymous]
         public IActionResult Authenticate(UserAuthenticateRequestViewModel userViewModel)
         {
