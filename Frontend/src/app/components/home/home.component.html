@@ -44,14 +44,37 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
                 <a *ngIf="!isAdmin" href="/mydata" id="person">
                     <img src="../../assets/images/person.png" alt="Ícone" height="50" class="d-inline-block align-top"
-                        title="Fazer Login" />
+                        title="Meus Dados" />
                     <span id="person-label">Meus Dados</span>
                 </a>
-                <a *ngIf="isAdmin" href="/jobs" id="person">
-                    <img src="../../assets/images/tools.png" alt="Ícone" height="50" class="d-inline-block align-top"
-                        title="Fazer Login" />
-                    <span id="person-label">Serviços</span>
-                </a>
+
+                <div *ngIf="!isAdmin" class="dropdown btn-secondary dropdown-toggle custom-dropdown-toggle" id="dropdownMenuLink" id="person" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div style="text-decoration: none;" role="button" >
+                        <img src="../../assets/images/tools.png" alt="Ícone" height="50"
+                            class="d-inline-block align-top" title="Gerenciar" /> <br>
+                        <span id="person-label">Gerenciar</span>
+                    </div>
+
+                    <ul class="dropdown-menu dropdown-menu-end custom-dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item custom-dropdown-item" href="/jobs">Serviços</a></li>
+                        <li><a class="dropdown-item custom-dropdown-item" href="/observations">Observações</a></li>
+                        <li><a class="dropdown-item custom-dropdown-item" (click)="logout()">Sair</a></li>
+                    </ul>
+                </div>
+
+                <div *ngIf="isAdmin" class="dropdown btn-secondary dropdown-toggle custom-dropdown-toggle" id="dropdownMenuLink" id="person" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div style="text-decoration: none;" role="button" >
+                        <img src="../../assets/images/tools.png" alt="Ícone" height="50"
+                            class="d-inline-block align-top" title="Gerenciar" /> <br>
+                        <span id="person-label">Gerenciar</span>
+                    </div>
+
+                    <ul class="dropdown-menu dropdown-menu-end custom-dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item custom-dropdown-item" href="/jobs">Serviços</a></li>
+                        <li><a class="dropdown-item custom-dropdown-item" href="/observations">Observações</a></li>
+                        <li><a class="dropdown-item custom-dropdown-item" (click)="logout()">Sair</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </ng-container>
@@ -71,12 +94,13 @@
                         </div>
                         <mat-form-field appearance="fill">
                             <mat-label>Choose a date</mat-label>
-                            <input matInput [matDatepicker]="picker" [(ngModel)]="date" (dateChange)="onDateChange($event)">
+                            <input matInput [matDatepicker]="picker" [(ngModel)]="date"
+                                (dateChange)="onDateChange($event)">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
-                        <input [ngxTimepicker]="myTimepicker" (ngModelChange)="onTimeChange($event)" [(ngModel)]="selectedTime" placeholder="Choose time" [format]="24"
-                            readonly>
+                        <input [ngxTimepicker]="myTimepicker" (ngModelChange)="onTimeChange($event)"
+                            [(ngModel)]="selectedTime" placeholder="Choose time" [format]="24" readonly>
                         <ngx-material-timepicker #myTimepicker></ngx-material-timepicker>
                         <div class="d-flex justify-content-center">
                             <button type="submit" (click)="save()" class="btn btn-primary">Salvar</button>

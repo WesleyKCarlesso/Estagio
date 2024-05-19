@@ -36,6 +36,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     letter-spacing: .0125em;
 }
 
+.navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    background-color: transparent !important;
+}
+
 #person {
     margin-right: 10px;
     cursor: pointer;
@@ -58,11 +67,30 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: #343a40;
 }
 
-.navbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 2;
-    background-color: transparent !important;
+.custom-dropdown-toggle {
+    background-color: #f8f9fa;
+    border: none;
+    color: #343a40;
+}
+
+.custom-dropdown-menu {
+    background-color: #f8f9fa;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 150px; /* Ajuste a largura mínima do menu */
+    width: auto; /* Permitir ajuste automático */
+    padding: 0; /* Remover padding padrão */
+}
+
+.custom-dropdown-item {
+    color: #343a40;
+    text-decoration: none;
+    padding: 10px 20px;
+    width: 150px; /* Ajuste a largura dos itens */
+    box-sizing: border-box; /* Certifique-se de que padding é incluído na largura */
+}
+
+.custom-dropdown-item:hover {
+    background-color: #e2e6ea;
+    color: #343a40;
 }

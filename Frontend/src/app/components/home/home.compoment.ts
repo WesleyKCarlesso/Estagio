@@ -117,7 +117,7 @@ export class HomeComponent implements OnInit {
       "userId": this.userId,
     }).subscribe({
       next: (data: any) => {
-        // this.snackBarService.openSnackBar('Login realizado com sucesso.', "Entendido");
+        this.snackBarService.openSnackBar('Serviço cadastrado com sucesso.', "Entendido");
       },
       error: (error) => {
         console.error('Erro ao cadastrar servico:', error);
@@ -136,16 +136,18 @@ export class HomeComponent implements OnInit {
       title: 'test',
       start: this.date
     })
-    console.log(this.date.toISOString())
-    console.log('save')
-    console.log('get all')
     this.scheduleDataService.getAll().subscribe(
       (data) => {
-        console.log(data);
       },
       (error) => {
         console.error('Failed to retrieve data:', error);
       }
     )
+  }
+
+  logout() {
+    localStorage.clear();
+
+    window.location.reload();
   }
 }

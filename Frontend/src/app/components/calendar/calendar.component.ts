@@ -77,7 +77,6 @@ export class CalendarComponent {
   activeDayIsOpen: boolean = true;
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    console.log(this.events)
     if (isSameMonth(date, this.viewDate)) {
       if (
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
@@ -96,8 +95,6 @@ export class CalendarComponent {
     newStart,
     newEnd,
   }: CalendarEventTimesChangedEvent): void {
-    console.log('event')
-    console.log(event)
     this.events = this.events.map((iEvent) => {
       if (iEvent === event) {
         return {
@@ -112,8 +109,6 @@ export class CalendarComponent {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    console.log('event')
-    console.log(event)
     this.scheduleDataService.update({
       "id": event.id,
       "serviceDate": event.start
