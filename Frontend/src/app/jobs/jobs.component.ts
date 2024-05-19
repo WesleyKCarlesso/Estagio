@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-jobs',
   templateUrl: './jobs.component.html',
-  styleUrls: ['./jobs.component.css']
+  styleUrl: './jobs.component.css'
 })
 export class JobsComponent {
   job: any = {};
@@ -15,7 +15,7 @@ export class JobsComponent {
   jobsForm!: FormGroup;
   showList: boolean = true;
   isNew: boolean = false;
-  originalJob: any = {}; // Adicionado para armazenar a cópia dos dados originais
+  originalJob: any = {};
 
   constructor(private jobDataService: JobDataService, private snackBarService: SnackBarService, private router: Router) { }
 
@@ -158,6 +158,7 @@ export class JobsComponent {
     this.showList = false;
     this.isNew = true;
     this.jobsForm.reset();
+    this.job = {};
   }
 
   cancel() {
@@ -172,6 +173,7 @@ export class JobsComponent {
   openDetails(job: any) {
     this.showList = false;
     this.isNew = false;
+    this.job = job;
     this.originalJob = { ...job }; // Salva uma cópia dos dados originais
 
     this.jobsForm.patchValue({

@@ -42,22 +42,16 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-                <a *ngIf="!isAdmin" href="/mydata" id="person">
-                    <img src="../../assets/images/person.png" alt="Ícone" height="50" class="d-inline-block align-top"
-                        title="Meus Dados" />
-                    <span id="person-label">Meus Dados</span>
-                </a>
 
                 <div *ngIf="!isAdmin" class="dropdown btn-secondary dropdown-toggle custom-dropdown-toggle" id="dropdownMenuLink" id="person" data-bs-toggle="dropdown" aria-expanded="false">
                     <div style="text-decoration: none;" role="button" >
-                        <img src="../../assets/images/tools.png" alt="Ícone" height="50"
-                            class="d-inline-block align-top" title="Gerenciar" /> <br>
-                        <span id="person-label">Gerenciar</span>
+                        <img src="../../assets/images/person.png" alt="Ícone" height="50"
+                            class="d-inline-block align-top" title="Minha Conta" /> <br>
+                        <span id="person-label">Minha Conta</span>
                     </div>
 
                     <ul class="dropdown-menu dropdown-menu-end custom-dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item custom-dropdown-item" href="/jobs">Serviços</a></li>
-                        <li><a class="dropdown-item custom-dropdown-item" href="/observations">Observações</a></li>
+                        <li><a class="dropdown-item custom-dropdown-item" routerLink="/mydata">Meus Dados</a></li>
                         <li><a class="dropdown-item custom-dropdown-item" (click)="logout()">Sair</a></li>
                     </ul>
                 </div>
@@ -70,8 +64,8 @@
                     </div>
 
                     <ul class="dropdown-menu dropdown-menu-end custom-dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item custom-dropdown-item" href="/jobs">Serviços</a></li>
-                        <li><a class="dropdown-item custom-dropdown-item" href="/observations">Observações</a></li>
+                        <li><a class="dropdown-item custom-dropdown-item" routerLink="/jobs">Serviços</a></li>
+                        <li><a class="dropdown-item custom-dropdown-item" routerLink="/observations">Observações</a></li>
                         <li><a class="dropdown-item custom-dropdown-item" (click)="logout()">Sair</a></li>
                     </ul>
                 </div>
