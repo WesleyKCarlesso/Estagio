@@ -23,6 +23,7 @@ import {
   CalendarView,
 } from "angular-calendar";
 import { EventColor } from "calendar-utils";
+import { ScheduleDataService } from "../../data-services/schedule.data-service";
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -46,6 +47,8 @@ const colors: Record<string, EventColor> = {
 })
 export class CalendarComponent {
   @Input() events: CalendarEvent[] = [];
+
+  constructor(private scheduleDataService: ScheduleDataService) { }
 
   locale: Intl.Locale = new Intl.Locale("pt-BR")
 
@@ -93,7 +96,8 @@ export class CalendarComponent {
     newStart,
     newEnd,
   }: CalendarEventTimesChangedEvent): void {
-    console.log(newEnd);
+    console.log('event')
+    console.log(event)
     this.events = this.events.map((iEvent) => {
       if (iEvent === event) {
         return {
@@ -108,7 +112,17 @@ export class CalendarComponent {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    console.log(action, event);
+    console.log('event')
+    console.log(event)
+    this.scheduleDataService.update({
+      "id": event.id,
+      "serviceDate": event.start
+    }).subscribe({
+      next: (data: any) => {
+      },
+      error: (error) => {
+      }
+    })
   }
 
   addEventWithParams(data: any): void {

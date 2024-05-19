@@ -13,7 +13,8 @@ export class HomeComponent implements OnInit {
   isLogged: boolean = false;
   isAdmin: boolean = false;
   options: any = [];
-  selectedOption: String = '';
+  selectedOption: any = {};
+  selectedOptionId: String = ''
   selectedTime: string = '';
   date: Date = new Date()
   userId: string = ''
@@ -32,17 +33,10 @@ export class HomeComponent implements OnInit {
     })
 
     this.isLogged = !!userLoggedString;
-    console.log(this.isLogged)
-
-    console.log('data inicial')
-    console.log(this.date)
     if (!!userLoggedString) {
       this.isAdmin = JSON.parse(userLoggedString).user.isAdmin;
       this.userId = JSON.parse(userLoggedString).user.id;
-      console.log('logado:')
-      console.log(this.userId)
     }
-    console.log('get all')
     this.scheduleDataService.getAll().subscribe((data: any) => {
       data.forEach((element: any) => {
         if (this.isAdmin) {
@@ -54,6 +48,7 @@ export class HomeComponent implements OnInit {
                 beforeStart: false,
                 afterEnd: false
               },
+              id: element.id,
               draggable: true,
               color: { primary: '#0000aa', secondary: '#0000aa' },
               title: 'test'
@@ -61,9 +56,6 @@ export class HomeComponent implements OnInit {
           )
         }
         else {
-          console.log('aqui')
-          console.log(this.userId)
-          console.log(element.userId)
           if (this.userId != element.userId) {
             this.events.push(
               {
@@ -73,6 +65,7 @@ export class HomeComponent implements OnInit {
                   beforeStart: false,
                   afterEnd: false
                 },
+                id: element.id,
                 draggable: false,
                 color: { primary: 'ff0000', secondary: '#ff0000' },
                 title: 'test'
@@ -89,6 +82,7 @@ export class HomeComponent implements OnInit {
                   afterEnd: false
                 },
                 draggable: true,
+                id: element.id,
                 color: { primary: '00ff00', secondary: '#00ff00' },
                 title: 'test'
               }
@@ -100,15 +94,17 @@ export class HomeComponent implements OnInit {
   }
 
   onDropdownChange(option: Event) {
-    console.log(option);
+    this.options.forEach((element: any) => {
+      if(element.name === this.selectedOption) {
+        this.selectedOptionId = element.id
+      }
+    });
   }
 
   onDateChange(option: MatDatepickerInputEvent<any, any>) {
-    console.log(option)
   }
 
   onTimeChange(option: Event) {
-    console.log(option)
   }
 
   save() {
@@ -117,7 +113,7 @@ export class HomeComponent implements OnInit {
 
     this.scheduleDataService.create({
       "serviceDate": this.date.toISOString(),
-      "jobId": "2698A901-205B-49EF-B1F2-0B0DA19E2204",
+      "jobId": this.selectedOptionId,
       "userId": this.userId,
     }).subscribe({
       next: (data: any) => {
