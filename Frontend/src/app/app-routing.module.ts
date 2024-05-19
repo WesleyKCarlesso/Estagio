@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { registerLocaleData } from '@angular/common';
 import { RouterModule, Routes } from "@angular/router";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -23,6 +24,10 @@ import { JobsComponent } from "./jobs/jobs.component";
 import { ScheduleDataService } from "./data-services/schedule.data-service";
 import { JobDataService } from "./data-services/job.data-service";
 import { ObservationsComponent } from "./observations/observations.component";
+import localeBr from '@angular/common/locales/pt';
+import { LOCALE_ID } from '@angular/core';
+
+registerLocaleData(localeBr, 'br');
 
 @NgModule({
   declarations: [
@@ -62,7 +67,7 @@ import { ObservationsComponent } from "./observations/observations.component";
     ]),
     Interceptor,
   ],
-  providers: [UserDataService, ScheduleDataService, JobDataService],
+  providers: [UserDataService, ScheduleDataService, JobDataService, { provide: LOCALE_ID, useValue: 'br' }],
   exports: [RouterModule],
   bootstrap: [AppComponent],
 })
