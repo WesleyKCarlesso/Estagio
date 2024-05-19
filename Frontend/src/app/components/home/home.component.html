@@ -79,33 +79,43 @@
         </div>
     </ng-container>
 
-    <div class="container-fluid" style="padding: 0">
-        <div class="row justify-content-center align-items-center" style="height: 100vh;">
-            <div class="col-md-6">
-                <div class="home-overlay">
-                    <div class="content">
-                        <div>
-                            <label for="dropdown">Select an option:</label>
-                            <select id="dropdown" (change)="onDropdownChange($event)" [(ngModel)]="selectedOption">
-                                <option *ngFor="let option of options" [value]="option.name">
-                                    {{ option.name }}
-                                </option>
-                            </select>
+ 
+ <div class="container-fluid" style="padding: 0">
+    <div class="row justify-content-center align-items-center" style="height: 100vh;">
+        <div class="col-md-8">
+            <div class="home-overlay">
+                <div class="content">
+                    <div class="form-section">
+                        <div class="left-section">
+                            <mat-form-field appearance="fill" style="width: 100%;">
+                                <mat-label>Choose a date</mat-label>
+                                <input matInput [matDatepicker]="picker" [(ngModel)]="date"
+                                    (dateChange)="onDateChange($event)">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
                         </div>
-                        <mat-form-field appearance="fill">
-                            <mat-label>Choose a date</mat-label>
-                            <input matInput [matDatepicker]="picker" [(ngModel)]="date"
-                                (dateChange)="onDateChange($event)">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                        </mat-form-field>
-                        <input [ngxTimepicker]="myTimepicker" (ngModelChange)="onTimeChange($event)"
-                            [(ngModel)]="selectedTime" placeholder="Choose time" [format]="24" readonly>
-                        <ngx-material-timepicker #myTimepicker></ngx-material-timepicker>
-                        <div class="d-flex justify-content-center">
-                            <button type="submit" (click)="save()" class="btn btn-primary">Salvar</button>
+                        <div class="right-section">
+                            <div>
+                                <label for="dropdown">Select an option:</label>
+                                <select id="dropdown" (change)="onDropdownChange($event)" [(ngModel)]="selectedOption">
+                                    <option *ngFor="let option of options" [value]="option.name">
+                                        {{ option.name }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div>
+                                <input [ngxTimepicker]="myTimepicker" (ngModelChange)="onTimeChange($event)"
+                                    [(ngModel)]="selectedTime" placeholder="Choose time" [format]="24" readonly>
+                                <ngx-material-timepicker #myTimepicker></ngx-material-timepicker>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" (click)="save()" class="btn btn-primary">Salvar</button>
+                            </div>
                         </div>
-                        <hr style="color: black;" />
+                    </div>
+                    <hr style="color: black; width: 100%;" />
+                    <div class="calendar-section">
                         <app-calendar [events]="events"></app-calendar>
                     </div>
                 </div>
