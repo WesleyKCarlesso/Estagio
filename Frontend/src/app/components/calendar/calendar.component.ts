@@ -1,29 +1,10 @@
-import {
-  Input,
-  Component,
-  ChangeDetectionStrategy,
-  ViewChild,
-  TemplateRef,
-} from "@angular/core";
-import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
-  isSameDay,
-  isSameMonth,
-  addHours,
-} from "date-fns";
+import { Input, Component, ChangeDetectionStrategy, ViewChild, TemplateRef, } from "@angular/core";
+import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours, } from "date-fns";
 import { Subject } from "rxjs";
-import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent,
-  CalendarView,
-} from "angular-calendar";
+import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView, } from "angular-calendar";
 import { EventColor } from "calendar-utils";
 import { ScheduleDataService } from "../../data-services/schedule.data-service";
+import { SnackBarService } from '../../data-services/snack-bar.service';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -48,10 +29,9 @@ const colors: Record<string, EventColor> = {
 export class CalendarComponent {
   @Input() events: CalendarEvent[] = [];
 
-  constructor(private scheduleDataService: ScheduleDataService) { }
+  constructor(private scheduleDataService: ScheduleDataService, private snackBarService: SnackBarService) { }
 
   locale: Intl.Locale = new Intl.Locale("pt-BR")
-
   viewDate: Date = new Date();
 
   actions: CalendarEventAction[] = [
@@ -106,11 +86,16 @@ export class CalendarComponent {
     console.log(event)
     this.scheduleDataService.update({
       "id": event.id,
-      "serviceDate": event.end
+      "serviceDate": event.end,
+      "description": ""
     }).subscribe({
       next: (data: any) => {
+        window.location.reload();
       },
       error: (error) => {
+        window.location.reload();
+
+        this.snackBarService.openSnackBar(error.error, "Entendido");
       }
     })
   }

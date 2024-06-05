@@ -1,6 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { UserDataService } from '../data-services/user.data-service';
-import { SnackBarService } from '../data-services/snack-bar.service';
+import { UserDataService } from '../../data-services/user.data-service';
+import { SnackBarService } from '../../data-services/snack-bar.service';
 
 @Component({
   selector: 'app-observations',

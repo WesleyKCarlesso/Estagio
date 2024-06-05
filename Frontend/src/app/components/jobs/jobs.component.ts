@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { JobDataService } from '../data-services/job.data-service';
-import { SnackBarService } from '../data-services/snack-bar.service';
+import { JobDataService } from '../../data-services/job.data-service';
+import { SnackBarService } from '../../data-services/snack-bar.service';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 

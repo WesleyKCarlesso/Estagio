@@ -31,6 +31,8 @@ namespace Backend.Controllers
         {
             var schedules = GetAll();
 
+            scheduleViewModel.ServiceDate = scheduleViewModel.ServiceDate.ToLocalTime();
+
             scheduleService.Create(scheduleViewModel);
             return Ok();
         }

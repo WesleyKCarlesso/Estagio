@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit {
       this.userId = JSON.parse(userLoggedString).user.id;
     }
     this.scheduleDataService.getAll().subscribe((data: any) => {
+      debugger;
       data.forEach((element: any) => {
         if (this.isAdmin) {
           this.events.push(
@@ -51,7 +52,7 @@ export class HomeComponent implements OnInit {
               id: element.id,
               draggable: true,
               color: { primary: '#0000aa', secondary: '#0000aa' },
-              title: 'test'
+              title: element.description
             }
           )
         }
@@ -68,7 +69,7 @@ export class HomeComponent implements OnInit {
                 id: element.id,
                 draggable: false,
                 color: { primary: 'ff0000', secondary: '#ff0000' },
-                title: 'test'
+                title: element.description
               }
             )
           }
@@ -84,7 +85,7 @@ export class HomeComponent implements OnInit {
                 draggable: true,
                 id: element.id,
                 color: { primary: '00ff00', secondary: '#00ff00' },
-                title: 'test'
+                title: element.description
               }
             )
           }
@@ -115,6 +116,7 @@ export class HomeComponent implements OnInit {
       "serviceDate": this.date.toISOString(),
       "jobId": this.selectedOptionId,
       "userId": this.userId,
+      "description": ""
     }).subscribe({
       next: (data: any) => {
         this.snackBarService.openSnackBar('Serviço cadastrado com sucesso.', "Entendido");

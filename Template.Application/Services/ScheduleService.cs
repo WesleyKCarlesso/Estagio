@@ -9,11 +9,15 @@ namespace Backend.Application.Services
     public class ScheduleService : IScheduleService
     {
         private readonly IScheduleRepository scheduleRepository;
+        private readonly IUserRepository userRepository;
+        private readonly IJobRepository jobRepository;
         private readonly IMapper mapper;
 
-        public ScheduleService(IScheduleRepository scheduleRepository, IMapper mapper)
+        public ScheduleService(IScheduleRepository scheduleRepository, IMapper mapper, IUserRepository userRepository, IJobRepository jobRepository)
         {
             this.scheduleRepository = scheduleRepository;
+            this.userRepository = userRepository;
+            this.jobRepository = jobRepository;
             this.mapper = mapper;
         }
 
@@ -22,6 +26,17 @@ namespace Backend.Application.Services
             IEnumerable<Schedule> schedules = scheduleRepository.GetAll();
 
             var schedulesViewModels = mapper.Map<List<ScheduleViewModel>>(schedules);
+
+            List<User> users = userRepository.GetAll().ToList();
+            List<Job> jobs = jobRepository.GetAll().ToList();
+
+            schedulesViewModels.ForEach(x =>
+            {
+                var user = users.FirstOrDefault(u => u.Id == x.UserId);
+                var job = jobs.FirstOrDefault(j => j.Id == x.JobId);
+
+                x.Description = $"{user.Name}, {job.Name}";
+            });
 
             return schedulesViewModels;
         }

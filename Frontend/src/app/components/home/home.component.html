@@ -1,88 +1,91 @@
 <div *ngIf="!isLogged">
-    <ng-container>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-                    <a href="/login" id="person">
-                        <img src="../../assets/images/person.png" alt="Ícone" height="50"
-                            class="d-inline-block align-top" title="Fazer Login" />
-                        <span id="person-label">Fazer Login</span>
-                    </a>
-                </div>
+<ng-container>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+                <a href="/login" id="person">
+                    <img src="../../assets/images/person.png" alt="Ícone" height="50"
+                        class="d-inline-block align-top" title="Fazer Login" />
+                    <span id="person-label">Fazer Login</span>
+                </a>
             </div>
-        </nav>
-    </ng-container>
-    <div class="container-fluid" style="padding: 0">
-        <div class="row justify-content-center align-items-center">
-            <div class="col" style="padding: 0">
-                <div>
-                    <div class="home-overlay"></div>
-                </div>
-                <div class="content_logo">
-                    <img src="../../assets/images/logo.png" />
-                </div>
+        </div>
+    </nav>
+</ng-container>
+<div class="container-fluid" style="padding: 0">
+    <div class="row justify-content-center align-items-center">
+        <div class="col" style="padding: 0">
+            <div>
+                <div class="home-overlay"></div>
+            </div>
+            <div class="content_logo">
+                <img src="../../assets/images/logo.png" />
             </div>
         </div>
     </div>
 </div>
+</div>
 
 <div *ngIf="isLogged">
-    <ng-container>
-        <div class="container-fluid">
-            <div class="d-flex justify-content-end" style="padding: 10px 0;">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+<ng-container>
+    <div class="container-fluid">
+        <div class="d-flex justify-content-end" style="padding: 10px 0;">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
 
-                <div *ngIf="!isAdmin" class="dropdown btn-secondary dropdown-toggle custom-dropdown-toggle" id="dropdownMenuLink" id="person" data-bs-toggle="dropdown" aria-expanded="false">
-                    <div style="text-decoration: none;" role="button" >
-                        <img src="../../assets/images/person.png" alt="Ícone" height="50"
-                            class="d-inline-block align-top" title="Minha Conta" /> <br>
-                        <span id="person-label">Minha Conta</span>
-                    </div>
-
-                    <ul class="dropdown-menu dropdown-menu-end custom-dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item custom-dropdown-item" routerLink="/mydata">Meus Dados</a></li>
-                        <li><a class="dropdown-item custom-dropdown-item" (click)="logout()">Sair</a></li>
-                    </ul>
+            <div *ngIf="!isAdmin" class="dropdown btn-secondary dropdown-toggle custom-dropdown-toggle"
+                id="dropdownMenuLink" id="person" data-bs-toggle="dropdown" aria-expanded="false">
+                <div style="text-decoration: none;" role="button">
+                    <img src="../../assets/images/person.png" alt="Ícone" height="50"
+                        class="d-inline-block align-top" title="Minha Conta" /> <br>
+                    <span id="person-label">Minha Conta</span>
                 </div>
 
-                <div *ngIf="isAdmin" class="dropdown btn-secondary dropdown-toggle custom-dropdown-toggle" id="dropdownMenuLink" id="person" data-bs-toggle="dropdown" aria-expanded="false">
-                    <div style="text-decoration: none;" role="button" >
-                        <img src="../../assets/images/tools.png" alt="Ícone" height="50"
-                            class="d-inline-block align-top" title="Gerenciar" /> <br>
-                        <span id="person-label">Gerenciar</span>
-                    </div>
+                <ul class="dropdown-menu dropdown-menu-end custom-dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item custom-dropdown-item" routerLink="/mydata">Meus Dados</a></li>
+                    <li><a class="dropdown-item custom-dropdown-item" (click)="logout()">Sair</a></li>
+                </ul>
+            </div>
 
-                    <ul class="dropdown-menu dropdown-menu-end custom-dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item custom-dropdown-item" routerLink="/jobs">Serviços</a></li>
-                        <li><a class="dropdown-item custom-dropdown-item" routerLink="/observations">Observações</a></li>
-                        <li><a class="dropdown-item custom-dropdown-item" (click)="logout()">Sair</a></li>
-                    </ul>
+            <div *ngIf="isAdmin" class="dropdown btn-secondary dropdown-toggle custom-dropdown-toggle"
+                id="dropdownMenuLink" id="person" data-bs-toggle="dropdown" aria-expanded="false">
+                <div style="text-decoration: none;" role="button">
+                    <img src="../../assets/images/tools.png" alt="Ícone" height="50"
+                        class="d-inline-block align-top" title="Gerenciar" /> <br>
+                    <span id="person-label">Gerenciar</span>
                 </div>
+
+                <ul class="dropdown-menu dropdown-menu-end custom-dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item custom-dropdown-item" routerLink="/jobs">Serviços</a></li>
+                    <li><a class="dropdown-item custom-dropdown-item" routerLink="/observations">Observações</a>
+                    </li>
+                    <li><a class="dropdown-item custom-dropdown-item" (click)="logout()">Sair</a></li>
+                </ul>
             </div>
         </div>
-    </ng-container>
+    </div>
+</ng-container>
 
- 
- <div class="container-fluid" style="padding: 0">
-    <div class="row justify-content-center align-items-center" style="height: 100vh;">
+
+<div class="container-fluid" style="padding: 0">
+    <div class="row justify-content-center align-items-center" style="height: 80vh;">
         <div class="col-md-8">
             <div class="home-overlay">
-                <div class="content">
+                <div class="content-main">
                     <div class="form-section">
                         <div class="left-section">
                             <mat-form-field appearance="fill" style="width: 100%;">
-                                <mat-label>Choose a date</mat-label>
+                                Selecione o Dia
                                 <input matInput [matDatepicker]="picker" [(ngModel)]="date"
                                     (dateChange)="onDateChange($event)">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -91,8 +94,9 @@
                         </div>
                         <div class="right-section">
                             <div>
-                                <label for="dropdown">Select an option:</label>
-                                <select id="dropdown" (change)="onDropdownChange($event)" [(ngModel)]="selectedOption">
+                                <label for="dropdown">Selecione o serviço:</label>
+                                <select id="dropdown" (change)="onDropdownChange($event)"
+                                    [(ngModel)]="selectedOption">
                                     <option *ngFor="let option of options" [value]="option.name">
                                         {{ option.name }}
                                     </option>
@@ -100,7 +104,8 @@
                             </div>
                             <div>
                                 <input [ngxTimepicker]="myTimepicker" (ngModelChange)="onTimeChange($event)"
-                                    [(ngModel)]="selectedTime" placeholder="Choose time" [format]="24" readonly>
+                                    [(ngModel)]="selectedTime" placeholder="Selecione o horário" [format]="24"
+                                    readonly>
                                 <ngx-material-timepicker #myTimepicker></ngx-material-timepicker>
                             </div>
                             <div class="d-flex justify-content-center">
