@@ -27,4 +27,8 @@ export class ScheduleDataService {
     update(data: any) {
       return this.http.put(this.module + 'Update', data)
     }
+
+    delete(data: any) {
+      return this.http.put(this.module + 'Delete', data)
+    }
 }

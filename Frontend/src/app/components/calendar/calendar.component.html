@@ -21,6 +21,8 @@
         (locale)="locale" 
         [dayStartHour]="8" 
         [dayEndHour]="18"
+        [hourSegmentHeight]="50"
+        [minimumEventHeight]="50"
         (eventClicked)="handleEvent('Clicked', $event.event)" 
         (eventTimesChanged)="eventTimesChanged($event)">
     </mwl-calendar-week-view>

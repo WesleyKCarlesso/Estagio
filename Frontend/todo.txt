@@ -1,5 +1,2 @@
 n deixar colocar no msm dia
-testar atividade com intervalo
 testar se n da pra marcar no horairo q ja existe, claro, pra n dar conflito
-label tem q ser cliente e trabalho
-arrumar o registrar q n funciona

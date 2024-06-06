@@ -35,7 +35,7 @@ namespace Backend.Application.Services
                 var user = users.FirstOrDefault(u => u.Id == x.UserId);
                 var job = jobs.FirstOrDefault(j => j.Id == x.JobId);
 
-                x.Description = $"{user.Name}, {job.Name}";
+                x.Description = $"{user.Name}, {job.Name} {user.Observation}";
             });
 
             return schedulesViewModels;

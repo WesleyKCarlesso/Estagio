@@ -38,7 +38,6 @@ export class HomeComponent implements OnInit {
       this.userId = JSON.parse(userLoggedString).user.id;
     }
     this.scheduleDataService.getAll().subscribe((data: any) => {
-      debugger;
       data.forEach((element: any) => {
         if (this.isAdmin) {
           this.events.push(
@@ -112,6 +111,8 @@ export class HomeComponent implements OnInit {
     this.date.setMinutes(parseInt(this.selectedTime.split(':')[1]))
     this.date.setHours(parseInt(this.selectedTime.split(':')[0]))
 
+    debugger;
+
     this.scheduleDataService.create({
       "serviceDate": this.date.toISOString(),
       "jobId": this.selectedOptionId,
@@ -132,19 +133,6 @@ export class HomeComponent implements OnInit {
         }
       }
     });
-
-    this.events.push({
-      draggable: true,
-      title: 'test',
-      start: this.date
-    })
-    this.scheduleDataService.getAll().subscribe(
-      (data) => {
-      },
-      (error) => {
-        console.error('Failed to retrieve data:', error);
-      }
-    )
   }
 
   logout() {

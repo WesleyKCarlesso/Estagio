@@ -26,6 +26,9 @@ import { JobDataService } from "./data-services/job.data-service";
 import { ObservationsComponent } from "./components/observations/observations.component";
 import localeBr from '@angular/common/locales/pt';
 import { LOCALE_ID } from '@angular/core';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
+import { MyDateAdapter, MY_DATE_FORMATS } from "./my-date-format";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 registerLocaleData(localeBr, 'br');
 
@@ -66,8 +69,16 @@ registerLocaleData(localeBr, 'br');
       { path: "**", redirectTo: "/home", pathMatch: "full" },
     ]),
     Interceptor,
+    BrowserAnimationsModule
   ],
-  providers: [UserDataService, ScheduleDataService, JobDataService, { provide: LOCALE_ID, useValue: 'br' }],
+  providers: [
+    UserDataService, 
+    ScheduleDataService, 
+    JobDataService, 
+    { provide: LOCALE_ID, useValue: 'br' },
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+  ],
   exports: [RouterModule],
   bootstrap: [AppComponent],
 })
