@@ -32,12 +32,12 @@ class Program
         using (IDbConnection db = new SqlConnection(connectionString))
         {
             var tomorrow = DateTime.Now.AddDays(1).Date;
-            var schedules = db.Query("SELECT U.Name, U.Phone, FORMAT(S.ServiceDate, 'dd/MM/yyyy HH:mm:ss') Date FROM Schedules S INNER JOIN Users U ON U.Id = S.UserId WHERE CAST(S.ServiceDate AS DATE) = @Tomorrow", new { Tomorrow = tomorrow.ToString("MM/dd/yyyy") });
+            var schedules = db.Query("SELECT U.Name, U.Phone, FORMAT(S.ServiceDate, 'dd/MM/yyyy HH:mm:ss') Date, J.Name FROM Schedules S INNER JOIN Users U ON U.Id = S.UserId INNER JOIN Jobs J on J.Id = S.JobId WHERE CAST(S.ServiceDate AS DATE) = @Tomorrow", new { Tomorrow = tomorrow.ToString("MM/dd/yyyy") });
 
             foreach (var schedule in schedules)
             {
                 var phoneNumber = "whatsapp:+55" + schedule.Phone;
-                var message = $"Olá, só lembrando que você tem um horário agendado para amanhã na Peluqueria: {schedule.Date}.";
+                var message = $"Olá, só lembrando que você tem um horário agendado para amanhã na Peluqueria: {schedule.Date}. Serviço: {schedule.Name}";
                 SendMessage(phoneNumber, message);
             }
         }

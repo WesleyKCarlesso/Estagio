@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ScheduleDataService } from "../../data-services/schedule.data-service";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 import { JobDataService } from "../../data-services/job.data-service";
-import { CalendarEvent } from "angular-calendar";
+import { CalendarEvent, CalendarEventAction } from "angular-calendar";
+import { SnackBarService } from '../../data-services/snack-bar.service';
 
 @Component({
   selector: "app-home",
@@ -18,10 +19,33 @@ export class HomeComponent implements OnInit {
   selectedTime: string = '';
   date: Date = new Date()
   userId: string = ''
-  snackBarService: any;
-  events: CalendarEvent[] = []
+  events: CalendarEvent[] = [];
+  actions: CalendarEventAction[] = [
+    {
+      label: '<i class="fas fa-fw fa-trash-alt"></i>',
+      a11yLabel: 'Delete',
+      onClick: ({ event }: { event: CalendarEvent }): void => {
+        this.scheduleDataService.delete(event.id).subscribe({
+          next: (data: any) => {
+            window.location.reload();
+          },
+          error: (error) => {
+            console.error('Erro ao deletar servico:', error);
+            let errorMessage = 'Erro ao deletar servico. Por favor, tente novamente mais tarde.';
+            if (error.status == 400) {
+              this.snackBarService.openSnackBar(error.error, "Entendido");
+            }
+            else {
+              this.snackBarService.openSnackBar(errorMessage, "Entendido");
+            }
+          }
+        });
+      },
+    },
+  ];
+  hours: any = [];
 
-  constructor(private scheduleDataService: ScheduleDataService, private jobDataServce: JobDataService) { }
+  constructor(private scheduleDataService: ScheduleDataService, private jobDataServce: JobDataService, private snackBarService: SnackBarService) { }
 
   ngOnInit() {
     const userLoggedString = localStorage.getItem("user_logged");
@@ -43,11 +67,12 @@ export class HomeComponent implements OnInit {
           this.events.push(
             {
               start: (new Date(element.serviceDate)),
-              end: (new Date(element.serviceDate)),
+              end: (new Date(element.serviceFinish)),
               resizable: {
                 beforeStart: false,
                 afterEnd: false
               },
+              actions: this.actions,
               id: element.id,
               draggable: true,
               color: { primary: '#0000aa', secondary: '#0000aa' },
@@ -60,7 +85,7 @@ export class HomeComponent implements OnInit {
             this.events.push(
               {
                 start: (new Date(element.serviceDate)),
-                end: (new Date(element.serviceDate)),
+                end: (new Date(element.serviceFinish)),
                 resizable: {
                   beforeStart: false,
                   afterEnd: false
@@ -68,7 +93,7 @@ export class HomeComponent implements OnInit {
                 id: element.id,
                 draggable: false,
                 color: { primary: 'ff0000', secondary: '#ff0000' },
-                title: element.description
+                title: 'Horário reservado'
               }
             )
           }
@@ -76,11 +101,12 @@ export class HomeComponent implements OnInit {
             this.events.push(
               {
                 start: (new Date(element.serviceDate)),
-                end: (new Date(element.serviceDate)),
+                end: (new Date(element.serviceFinish)),
                 resizable: {
                   beforeStart: false,
                   afterEnd: false
                 },
+                actions: this.actions,
                 draggable: true,
                 id: element.id,
                 color: { primary: '00ff00', secondary: '#00ff00' },
@@ -91,6 +117,59 @@ export class HomeComponent implements OnInit {
         }
       });
     });
+    document.getElementById('refreshSchedulesButton');
+  }
+
+  ngAfterViewInit() {
+    this.hours = document.getElementsByClassName('cal-time');
+
+    Array.from(this.hours).forEach((element: any) => {
+      const textContent = element.textContent.trim();
+      switch (textContent) {
+        case '6 PM':
+          element.textContent = '18:00';
+          break;
+        case '7 PM':
+          element.textContent = '19:00';
+          break;
+        case '8 PM':
+          element.textContent = '20:00';
+          break;
+        case '9 AM':
+          element.textContent = '09:00';
+          break;
+        case '10 AM':
+          element.textContent = '10:00';
+          break;
+        case '11 AM':
+          element.textContent = '11:00';
+          break;
+        case '12 PM':
+          element.textContent = '12:00';
+          break;
+        case '1 PM':
+          element.textContent = '13:00';
+          break;
+        case '2 PM':
+          element.textContent = '14:00';
+          break;
+        case '3 PM':
+          element.textContent = '15:00';
+          break;
+        case '4 PM':
+          element.textContent = '16:00';
+          break;
+        case '5 PM':
+          element.textContent = '17:00';
+          break;
+        case '8 AM':
+          element.textContent = '08:00';
+          break;
+        default:
+          break;
+      }
+    });
+
   }
 
   onDropdownChange(option: Event) {
@@ -108,19 +187,50 @@ export class HomeComponent implements OnInit {
   }
 
   save() {
-    this.date.setMinutes(parseInt(this.selectedTime.split(':')[1]))
-    this.date.setHours(parseInt(this.selectedTime.split(':')[0]))
+    this.date.setMinutes(parseInt(this.selectedTime.split(':')[1]));
+    this.date.setHours(parseInt(this.selectedTime.split(':')[0]));
 
-    debugger;
+    this.date.setSeconds(0);
+
+    if (this.date.getHours() < 8 || this.date.getHours() >= 19) {
+      this.snackBarService.openSnackBar("Insira um horário entre as 08:00 e as 18:00.", "Entendido");
+      return;
+    }
+
+    if (this.date.getDay() == 0 || this.date.getDay() == 1) {
+      this.snackBarService.openSnackBar("Não é possível inserir um horário domingo ou segunda-feira.", "Entendido");
+      return;  
+    }
+
+    var isTimeConflict = false;
+
+    this.events.forEach(x => {
+      x.start.setSeconds(0);
+      x.end?.setSeconds(0);
+
+      var start = x.start;
+      var end = x.end ?? new Date();
+
+      if (this.date >= start && this.date < end) {
+        isTimeConflict = true;
+        return;
+      }
+    });
+
+    if (isTimeConflict) {
+      this.snackBarService.openSnackBar("Este horário está indisponível", "Entendido");
+      return;
+    }
 
     this.scheduleDataService.create({
       "serviceDate": this.date.toISOString(),
+      "serviceFinish": this.date.toISOString(),
       "jobId": this.selectedOptionId,
       "userId": this.userId,
       "description": ""
     }).subscribe({
       next: (data: any) => {
-        this.snackBarService.openSnackBar('Serviço cadastrado com sucesso.', "Entendido");
+        window.location.reload();
       },
       error: (error) => {
         console.error('Erro ao cadastrar servico:', error);

@@ -74,6 +74,9 @@
                     <p *ngIf="duration.errors?.['required']">O nome é obrigatório!</p>
                     <p *ngIf="duration.errors?.['rangeError']">O valor deve estar entre 0 e 500.</p>
                 </div>
+                <div class="validation-error">
+                    <p *ngIf="jobsForm.errors?.['invalidTimes']">Os tempos não condizem.</p>
+                </div>
             </div>
             <div class="form-group">
                 <label for="intervalDuration">Duração do intervalo (minutos)</label>

@@ -47,14 +47,16 @@ export class JobsComponent {
 
     var valid = true;
 
-    if (intervalDuration > duration || startInterval > duration) {
+    if (duration < 0 || intervalDuration < 0 || startInterval < 0)
       valid = false;
-    }
-    if ((startInterval + intervalDuration) > duration) {
-      valid = false;
-    }
 
-    return true ? null : { invalidTimes: true }
+    if (intervalDuration > duration || startInterval > duration)
+      valid = false;
+
+    if ((startInterval + intervalDuration) > duration)
+      valid = false;
+
+    return valid ? null : { invalidTimes: true }
   }
   
   rangeValidator(min: number, max: number): ValidatorFn {

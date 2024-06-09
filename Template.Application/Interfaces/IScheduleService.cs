@@ -8,6 +8,7 @@ namespace Backend.Application.Interfaces
         void Create(ScheduleViewModel scheduleViewModel);
         ScheduleViewModel GetById(string id);
         void Update(ScheduleViewModel scheduleViewModel);
+        bool HasTimeConflict(ScheduleViewModel scheduleViewModel);
         void Delete(string id);
     }
 }

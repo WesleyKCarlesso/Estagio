@@ -28,7 +28,11 @@ export class ScheduleDataService {
       return this.http.put(this.module + 'Update', data)
     }
 
-    delete(data: any) {
-      return this.http.put(this.module + 'Delete', data)
+    delete(id: any) {
+      return this.http.delete(this.module + 'Delete/' + id)
+    }
+
+    hasTimeConflict(data: any) {
+      return this.http.post(this.module + 'HasTimeConflict', data)
     }
 }

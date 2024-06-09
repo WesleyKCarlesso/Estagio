@@ -75,6 +75,19 @@ namespace Backend.Application.Services
 
             scheduleRepository.Update(schedule);
         }
+        
+        public bool HasTimeConflict(ScheduleViewModel scheduleViewModel) 
+        {
+            var schedules = GetAll();
+
+            scheduleViewModel.ServiceDate = scheduleViewModel.ServiceDate.ToLocalTime();
+            scheduleViewModel.ServiceFinish = scheduleViewModel.ServiceFinish.ToLocalTime();
+
+            return schedules.Any(x =>
+            scheduleViewModel.ServiceDate >= x.ServiceDate &&
+            scheduleViewModel.ServiceFinish <= x.ServiceFinish &&
+            scheduleViewModel.Id != x.Id);
+        }
 
         public void Delete(string id)
         {

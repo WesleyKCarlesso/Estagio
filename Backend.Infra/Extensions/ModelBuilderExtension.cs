@@ -42,6 +42,7 @@ namespace Backend.Data.Extensions
             {
                 Id = Guid.NewGuid(),
                 ServiceDate = DateTime.Now,
+                ServiceFinish = DateTime.Now.AddMinutes(30),
                 JobId = defaultJob.Id,
                 UserId = defaultUser.Id
             };

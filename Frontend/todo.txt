@@ -1,2 +1,1 @@
-n deixar colocar no msm dia
-testar se n da pra marcar no horairo q ja existe, claro, pra n dar conflito
+comportamento do "semana atual"

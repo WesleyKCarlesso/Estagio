@@ -34,24 +34,6 @@ export class CalendarComponent {
   locale: Intl.Locale = new Intl.Locale("pt-BR")
   viewDate: Date = new Date();
 
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: "Edit",
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent("Edited", event);
-      },
-    },
-    {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: "Delete",
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent("Deleted", event);
-      },
-    },
-  ];
-
   refresh = new Subject<void>();
 
   activeDayIsOpen: boolean = true;
@@ -75,29 +57,49 @@ export class CalendarComponent {
     newStart,
     newEnd,
   }: CalendarEventTimesChangedEvent): void {
-    console.log(event)
-    event.end = newEnd
-    event.end?.setHours(event.end.getHours() - 3)
+    event.end = newEnd;
+    event.start = newStart;
     this.handleEvent("Dropped or resized", event);
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    console.log(action)
-    console.log(event)
-    this.scheduleDataService.update({
-      "id": event.id,
-      "serviceDate": event.end,
-      "description": ""
-    }).subscribe({
+    this.scheduleDataService.hasTimeConflict({ "id": event.id, "serviceDate": event.start, "serviceFinish": event.end, "description": "" }).subscribe({
       next: (data: any) => {
-        window.location.reload();
+        if (data) {
+          this.snackBarService.openSnackBar("Horário indisponível.", "Entendido");
+          return;
+        }
+    
+        if (event.start.getHours() < 8 || event.start.getHours() >= 19) {
+          this.snackBarService.openSnackBar("Insira um horário entre as 08:00 e as 18:00.", "Entendido");
+          return;
+        }
+    
+        if (event.start.getDay() == 0 || event.start.getDay() == 1) {
+          this.snackBarService.openSnackBar("Não é possível inserir um horário domingo ou segunda-feira.", "Entendido");
+          return;  
+        }
+    
+        this.scheduleDataService.update({
+          "id": event.id,
+          "serviceDate": event.start,
+          "serviceFinish": event.end,
+          "description": ""
+        }).subscribe({
+          next: (data: any) => {
+            window.location.reload();
+          },
+          error: (error) => {
+            window.location.reload();
+    
+            this.snackBarService.openSnackBar(error.error, "Entendido");
+          }
+        })
       },
       error: (error) => {
-        window.location.reload();
-
         this.snackBarService.openSnackBar(error.error, "Entendido");
       }
-    })
+    });
   }
 
   addEventWithParams(data: any): void {
@@ -115,10 +117,7 @@ export class CalendarComponent {
         },
       },
     ];
-  }
-
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter((event) => event !== eventToDelete);
+    this.refresh.next();
   }
 
   closeOpenMonthViewDay() {

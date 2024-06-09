@@ -4,7 +4,7 @@
             <div class="btn btn-primary" mwlCalendarPreviousView [(viewDate)]="viewDate" [view]="'week'">
                 Anterior
             </div>
-            <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate" style="color: black;">
+            <div #refreshSchedulesButton class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate" style="color: black;">
                 Semana Atual
             </div>
             <div class="btn btn-primary" mwlCalendarNextView [(viewDate)]="viewDate" [view]="'week'">
@@ -20,7 +20,7 @@
         [refresh]="refresh" 
         (locale)="locale" 
         [dayStartHour]="8" 
-        [dayEndHour]="18"
+        [dayEndHour]="20"
         [hourSegmentHeight]="50"
         [minimumEventHeight]="50"
         (eventClicked)="handleEvent('Clicked', $event.event)" 

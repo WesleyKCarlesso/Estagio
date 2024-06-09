@@ -8,6 +8,7 @@ public class ScheduleMap : IEntityTypeConfiguration<Schedule>
     {
         builder.HasKey(s => s.Id); // Supondo que 'Id' seja a chave primária
         builder.Property(s => s.ServiceDate).IsRequired();
+        builder.Property(s => s.ServiceFinish).IsRequired();
 
         // Relacionamento com User e Job
         builder.HasOne(s => s.User)
