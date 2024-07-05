@@ -1,12 +1,13 @@
 # Sistema de Agendamento Online
 
-Um sistema de agendamento online para salão de beleza, dividido em Frontend com Angular e Bootstrap, Backend em .Net com Swagger, Serviço de envio de mensagens whatsapp também em .Net e banco de dados em SQL Server.
+Um sistema de agendamento online para salão de beleza, dividido em Frontend com Angular e Bootstrap, Backend em .Net com Swagger, Serviço de envio de mensagens whatsapp também em .Net, com integração com a API do Twilio e banco de dados em SQL Server.
 
 ## Tecnologias Utilizadas
 
 - **Frontend:** Angular, Bootstrap
-- **Backend, WhatsappSender:** .NET
+- **Backend:** .NET
 - **Banco de Dados:** SQL Server
+- **WhatsappSender:** Twilio API
 
 ## IDEs Utilizadas:
 
@@ -93,22 +94,17 @@ Para rodar o projeto localmente, você precisará ter os seguintes softwares ins
 
 2. Configure a conexão com o banco no Program.cs, na varíavel `connectionString` exatamente como foi feito no Backend.
 
-2. Configure as chaves da API do Twilio no arquivo `.env` na raiz do projeto:
+3. Configure as chaves da API do Twilio no arquivo `.env` na raiz do projeto:
     ```json
     ACCOUNT_SID
     ```
 
-3. No prompt de comando, restaure as dependências do projeto:
+4. No prompt de comando, restaure as dependências do projeto:
     ```sh
     dotnet restore
     ```
 
-4. Inicie o serviço de envio de mensagens, se preferir, abra a aplicação no Visual Studio e aperte a tecla `F5`:
+5. Inicie o serviço de envio de mensagens, se preferir, abra a aplicação no Visual Studio e aperte a tecla `F5`:
     ```sh
     dotnet run
     ```
-
-## Estrutura do Projeto
-
-Uma breve descrição da estrutura de diretórios do projeto.
-
