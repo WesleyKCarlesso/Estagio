@@ -96,7 +96,8 @@ Para rodar o projeto localmente, você precisará ter os seguintes softwares ins
 
 3. Configure as chaves da API do Twilio no arquivo `.env` na raiz do projeto:
     ```json
-    ACCOUNT_SID
+    ACCOUNT_SID=sua_account_sid
+    AUTH_TOKEN=seu_auth_token
     ```
 
 4. No prompt de comando, restaure as dependências do projeto:
