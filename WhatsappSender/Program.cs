@@ -12,17 +12,28 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.WriteLine("Iniciando a aplicação...");
+
         var connectionString = "Server=Wesley; Database=Estagio; Trusted_Connection=True;  TrustServerCertificate=True; Integrated Security=True;";
 
         Env.Load();
-        
+
         var accountSid = Environment.GetEnvironmentVariable("ACCOUNT_SID");
         var authToken = Environment.GetEnvironmentVariable("AUTH_TOKEN");
+
+        if (string.IsNullOrEmpty(accountSid) || string.IsNullOrEmpty(authToken))
+        {
+            Console.WriteLine("Erro: ACCOUNT_SID ou AUTH_TOKEN não está configurado.");
+            return;
+        }
+
         TwilioClient.Init(accountSid, authToken);
 
         while (true)
         {
+            Console.WriteLine("Verificando agendamentos...");
             CheckSchedules(connectionString);
+            Console.WriteLine("Verificação completa. Aguardando 60 segundos...");
             Thread.Sleep(60000);
         }
     }
@@ -38,6 +49,7 @@ class Program
             {
                 var phoneNumber = "whatsapp:+55" + schedule.Phone;
                 var message = $"Olá, só lembrando que você tem um horário agendado para amanhã na Peluqueria: {schedule.Date}. Serviço: {schedule.Name}";
+                Console.WriteLine($"Enviando mensagem para {phoneNumber}: {message}");
                 SendMessage(phoneNumber, message);
             }
         }
@@ -47,9 +59,11 @@ class Program
     {
         var from = new PhoneNumber("whatsapp:+14155238886");
         var toPhoneNumber = new PhoneNumber(to);
-        MessageResource.Create(
+        var msg = MessageResource.Create(
             from: from,
             to: toPhoneNumber,
             body: message);
+
+        Console.WriteLine($"Mensagem enviada com sucesso para {to}: SID {msg.Sid}");
     }
 }
