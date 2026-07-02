@@ -1,111 +1,157 @@
-# Sistema de Agendamento Online
+# Online Scheduling System
 
-Um sistema de agendamento online para salão de beleza, dividido em Frontend com Angular e Bootstrap, Backend em .Net com Swagger, Serviço de envio de mensagens whatsapp também em .Net, com integração com a API do Twilio e banco de dados em SQL Server.
+An online scheduling system for beauty salons, consisting of an Angular + Bootstrap frontend, a .NET backend with Swagger, a .NET WhatsApp messaging service integrated with the Twilio API, and a SQL Server database.
 
-## Tecnologias Utilizadas
+## Technologies
 
 - **Frontend:** Angular, Bootstrap
 - **Backend:** .NET
-- **Banco de Dados:** SQL Server
-- **WhatsappSender:** Twilio API
+- **Database:** SQL Server
+- **WhatsApp Service:** Twilio API
 
-## IDEs Utilizadas:
+## Development Tools
 
 - Visual Studio (https://visualstudio.microsoft.com/vs/community/)
 - Visual Studio Code (https://code.visualstudio.com/download)
-- SQL Server Management Studio, podendo instalar o SQL Server a partir dele (https://learn.microsoft.com/pt-br/sql/ssms/sql-server-management-studio-ssms)
+- SQL Server Management Studio (includes SQL Server installation options) (https://learn.microsoft.com/sql/ssms/sql-server-management-studio-ssms)
 
-## Requisitos
+## Requirements
 
-Para rodar o projeto localmente, você precisará ter os seguintes softwares instalados:
+To run this project locally, make sure you have the following installed:
 
 - Node.js (https://nodejs.org/)
 - Angular CLI (https://angular.io/cli)
 - .NET 8 SDK (https://dotnet.microsoft.com/download)
-- SQL Server (https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
+- SQL Server (https://www.microsoft.com/sql-server/sql-server-downloads)
 
-## Configuração do Ambiente
+---
 
-### Backend (.NET)
+# Environment Setup
 
-1. Clone o repositório do projeto:
-    ```sh
-    git clone https://github.com/WesleyKCarlesso/Estagio.git
-    cd Estagio/Backend
-    ```
+## Backend (.NET)
 
-2. Abra o Visual Studio como administrador e abra o projeto no caminho Estagio/Backend.
+### 1. Clone the repository
 
-3. Configure a string de conexão com o SQL Server no arquivo `appsettings.json` (neste caso o login é feito com autenticação do windows):
-    ```json
-    "ConnectionStrings": {
-        "DefaultConnection": "Server=SEU_SERVIDOR;Database=SEU_BANCO;Trusted_Connection=True;TrustServerCertificate=True;Integrated Security=True;"
-    }
-    ```
+```bash
+git clone https://github.com/WesleyKCarlesso/Estagio.git
+cd Estagio/Backend
+```
 
-4. Abra o Package Manager Console, no Default project, selecione:
-    ```sh
-    Backend.Data
-    ```
+### 2. Open the project
 
-5. Execute o comando na janela do Package Manager Console:
-    ```sh
-    update-database
-    ```
+Launch Visual Studio as Administrator and open the project located in:
 
-6. Inicie a aplicação backend com o comando abaixo no CMD ou apertando `F5` no Visual Studio:
-    ```sh
-    dotnet run
-    ```
+```
+Estagio/Backend
+```
 
-7. Para abrir a aplicação com o swagger:
-    ```
-    https://localhost:7018/swagger/index.html
-    ```
+### 3. Configure the database connection
 
-### Frontend (Angular)
+Update the connection string in `appsettings.json`.
 
-1. Navegue até o diretório do frontend:
-    ```sh
-    cd Estagio/Frontend
-    ```
+Example using Windows Authentication:
 
-2. Instale as dependências do projeto:
-    ```sh
-    npm install
-    ```
+```json
+"ConnectionStrings": {
+    "DefaultConnection": "Server=YOUR_SERVER;Database=YOUR_DATABASE;Trusted_Connection=True;TrustServerCertificate=True;Integrated Security=True;"
+}
+```
 
-3. Inicie a aplicação frontend:
-    ```sh
-    ng serve
-    ```
+### 4. Select the startup project for migrations
 
-4. Abra seu navegador e acesse:
-    ```
-    http://localhost:4200
-    ```
+Open the **Package Manager Console** and set the **Default Project** to:
 
-### Serviço de Envio de Mensagens no Whatsapp
+```
+Backend.Data
+```
 
-1. Vá até o diretório do projeto:
-    ```sh
-    cd Estagio/WhatsappSender
-    ```
+### 5. Apply the database migrations
 
-2. Configure a conexão com o banco no Program.cs, na varíavel `connectionString` exatamente como foi feito no Backend.
+Run:
 
-3. Configure as chaves da API do Twilio no arquivo `.env` na raiz do projeto:
-    ```json
-    ACCOUNT_SID=sua_account_sid
-    AUTH_TOKEN=seu_auth_token
-    ```
+```powershell
+update-database
+```
 
-4. No prompt de comando, restaure as dependências do projeto:
-    ```sh
-    dotnet restore
-    ```
+### 6. Start the backend
 
-5. Inicie o serviço de envio de mensagens, se preferir, abra a aplicação no Visual Studio e aperte a tecla `F5`:
-    ```sh
-    dotnet run
-    ```
+Run the application by pressing **F5** in Visual Studio or using:
+
+```bash
+dotnet run
+```
+
+### 7. Open Swagger
+
+Navigate to:
+
+```
+https://localhost:7018/swagger/index.html
+```
+
+---
+
+# Frontend (Angular)
+
+### 1. Navigate to the frontend directory
+
+```bash
+cd Estagio/Frontend
+```
+
+### 2. Install the dependencies
+
+```bash
+npm install
+```
+
+### 3. Start the Angular application
+
+```bash
+ng serve
+```
+
+### 4. Open the application
+
+Open your browser and navigate to:
+
+```
+http://localhost:4200
+```
+
+---
+
+# WhatsApp Messaging Service
+
+### 1. Navigate to the project directory
+
+```bash
+cd Estagio/WhatsappSender
+```
+
+### 2. Configure the database connection
+
+Update the `connectionString` variable in `Program.cs` using the same connection string configured for the backend.
+
+### 3. Configure the Twilio credentials
+
+Create or edit the `.env` file in the project root:
+
+```env
+ACCOUNT_SID=your_account_sid
+AUTH_TOKEN=your_auth_token
+```
+
+### 4. Restore the project dependencies
+
+```bash
+dotnet restore
+```
+
+### 5. Start the service
+
+You can either press **F5** in Visual Studio or run:
+
+```bash
+dotnet run
+```
